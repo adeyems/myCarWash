@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "561198209066",
+    "firebase_url": "https://mycarwash-4cf24.firebaseio.com",
+    "project_id": "mycarwash-4cf24",
+    "storage_bucket": "mycarwash-4cf24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561198209066:android:99b586c611d02d83",
+        "android_client_info": {
+          "package_name": "org.nativescript.myCarWash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561198209066-qdtlibe6b6pfpopronpbpfirstjpk2dd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJPkyI8QTDGOCgkYdaKC4OBg5HaCSlbzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561198209066-qdtlibe6b6pfpopronpbpfirstjpk2dd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

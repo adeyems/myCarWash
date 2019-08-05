@@ -1,0 +1,112 @@
+
+<ScrollView>
+    <StackLayout class="page page-icon form" [formGroup]="form" paddingBottom="10">
+        <StackLayout paddingBottom="50" paddingTop="10" >
+            <Label class="text-center page-title" text="Customer Registration Screen"></Label>
+        </StackLayout>
+        <StackLayout>
+            <TextField
+                    class="input input-field"
+                    returnKeyType="next"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    formControlName="name"
+                    hint="Name"
+                    #nameEl
+            ></TextField>
+            <Label  class="input-error"
+                    *ngIf="!nameControlIsValid"
+                    text="Must not be empty."
+            ></Label>
+        </StackLayout>
+        <StackLayout>
+            <TextField
+                    class="input input-field"
+                    returnKeyType="next"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    formControlName="surname"
+                    hint="Surname"
+                    #surnameEl
+            ></TextField>
+            <Label  class="input-error"
+                    *ngIf="!surnameControlIsValid"
+                    text="Must not be empty."
+            ></Label>
+        </StackLayout>
+        <StackLayout>
+            <TextField
+                    class="input input-field"
+                    returnKeyType="next"
+                    keyboardType="phone"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    formControlName="phone"
+                    hint="Mobile Number: +234/+353 *** **** ***"
+                    #phoneEl
+            ></TextField>
+            <Label  class="input-error"
+                    *ngIf="!phoneControlIsValid"
+                    text="Must be 14+ characters long including country code"
+            ></Label>
+        </StackLayout>
+        <StackLayout>
+            <TextField
+                    class="input input-field"
+                    returnKeyType="next"
+                    keyboardType="email"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    formControlName="email"
+                    hint="username (email)"
+                    #emailEl
+            ></TextField>
+            <Label
+                    *ngIf="!emailControlIsValid"
+                    class="input-error"
+                    text="Please enter a valid email."
+            ></Label>
+        </StackLayout>
+        <StackLayout class="">
+            <TextField
+                    class="input input-field"
+                    returnKeyType="done"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    [secure]="true"
+                    hint="Password"
+                    formControlName="password"
+                    (returnPress)="onDone()"
+                    #passwordEl
+            ></TextField>
+            <Label  class="input-error"
+                    *ngIf="!passwordControlIsValid"
+                    text="Must be 8+ characters long with uppercase, lowercase, and numbers."
+            ></Label>
+        </StackLayout>
+        <StackLayout class="">
+            <TextField
+                    class="input input-field"
+                    returnKeyType="done"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    [secure]="true"
+                    hint="Confirm Password"
+                    formControlName="confirmPassword"
+                    (returnPress)="onDone()"
+                    #confirmPasswordEl
+            ></TextField>
+            <Label  class="input-error"
+                    *ngIf="!confirmPasswordControlIsValid"
+                    text="Must match with password."
+            ></Label>
+        </StackLayout>
+        <Button
+                class="btn password-login-button"
+                text="Submit"
+                (tap)="onSubmit()"
+                [disabled]="!form.valid"
+        ></Button>
+        <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+    </StackLayout>
+</ScrollView>

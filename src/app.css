@@ -1,0 +1,50 @@
+/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+@import '~nativescript-theme-core/css/core.light.css';
+
+.fa {
+    font-family: "FontAwesome", serif, sans-serif;
+}
+
+.page-placeholder {
+    color: page-icon-color;
+    font-size: page-content-placeholder-font-size;
+    vertical-align: center;
+    horizontal-align: center;
+}
+
+.page-icon {
+    font-size: 72px;
+    vertical-align: top;
+    horizontal-align: center;
+}
+
+  ActionBar .action-bar-title {
+      horizontal-align: center;
+  }
+
+.action-bar-title {
+    horizontal-align: center;
+    font-size: 5%;
+}
+
+.page-title {
+    font-size: 20%;
+}
+
+.small {
+    font-family: Consolas, Monaco, monospace;
+    font-size: 5px;
+}
+Label {
+    font-size: 12px;
+}

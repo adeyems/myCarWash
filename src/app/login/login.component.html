@@ -1,0 +1,9 @@
+<StackLayout>
+    <StackLayout paddingBottom="50" paddingTop="20">
+        <Label class="text-center page-title" text="Login"></Label>
+    </StackLayout>
+    <GridLayout paddingBottom="30" rows="auto" columns="*,*">
+        <Button (tap)="goToCustomerLogin()" col="0" class="btn btn-primary" text="Customer"></Button>
+        <Button class="btn btn-primary" col="1" (tap)="goToManagementLogin()" text="Management"></Button>
+    </GridLayout>
+</StackLayout>

@@ -1,0 +1,51 @@
+/* Add mobile styles for the component here.  */
+
+.password-login-button {
+    color: #000000;
+    background-color: #F5F5F5;
+    width: 400px;
+    height: 200px;
+    padding: 10px 31px 10px 31px;
+    border-width: 3px;
+}
+
+.admin-label {
+    margin-left: 60%;
+    font-size: 20px;
+    color: #000000;margin-bottom: 20px;
+}
+
+.logo {
+    margin-top: 400px;
+    margin-left: 25%;
+}
+
+.input {
+    border-color: #226600;
+    width: 90%;
+    height: 200px;
+    border-radius: 8%;
+    border-width: 5px;
+}
+
+.input.ng-invalid.ng-touched {
+    border-color: red;
+    color: red;
+}
+
+.input-error {
+    width: 90%;
+    color: red;
+    font-size: 12px;
+}
+
+Label {
+    font-size: 15px;
+}
+
+.link {
+    text-decoration: underline;
+    color: blue;
+}
+
+

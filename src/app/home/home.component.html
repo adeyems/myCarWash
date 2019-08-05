@@ -1,0 +1,15 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Monitoring & Secure Recording Vital Signs for Asthmatic Patients"></Label>
+</ActionBar>
+
+<StackLayout  class="page page-content">
+    <StackLayout paddingBottom="70" paddingTop="20">
+        <Label class="text-center page-title" text="Login"></Label>
+    </StackLayout>
+    <StackLayout paddingBottom="30">
+        <Button (tap)="goToPatientLogin()" class="btn btn-primary" text="Asthmatic Patient"></Button>
+    </StackLayout>
+    <StackLayout>
+        <Button class="btn btn-primary" (tap)="goToMedicalPractitionerLogin()" text="Medical Practitioner"></Button>
+    </StackLayout>
+</StackLayout>

@@ -1,0 +1,57 @@
+<StackLayout class="page page-icon form" [formGroup]="form" paddingBottom="20">
+    <StackLayout paddingBottom="50" paddingTop="20">
+        <Label class="text-center page-title" text="Customer Login"></Label>
+    </StackLayout>
+    <StackLayout>
+        <TextField
+                class="input input-field"
+                returnKeyType="next"
+                keyboardType="email"
+                [autocorrect]="false"
+                autocapitalizationType="none"
+                formControlName="email"
+                hint="Email"
+                #emailEl
+        ></TextField>
+        <Label
+                *ngIf="!emailControlIsValid"
+                class="input-error"
+                text="Please enter a valid email."
+        ></Label>
+    </StackLayout>
+    <StackLayout class="">
+        <TextField
+                class="input input-field"
+                returnKeyType="done"
+                [autocorrect]="false"
+                autocapitalizationType="none"
+                [secure]="true"
+                hint="Password"
+                formControlName="password"
+                (returnPress)="onDone()"
+                #passwordEl
+        ></TextField>
+        <Label  class="input-error"
+                *ngIf="!passwordControlIsValid"
+                text="Must be 8+ characters long."
+        ></Label>
+    </StackLayout>
+    <Button
+            class="btn password-login-button"
+            text="Login"
+            (tap)="onSubmit()"
+            [disabled]="!form.valid"
+    ></Button>
+    <GridLayout rows="auto, auto" paddingTop="15">
+        <GridLayout row="0" class="text-center small" columns="*,4*,3*">
+            <Label col="0"></Label>
+            <Label col="1" class="small" text="Forgot Password?"> </Label>
+            <Label text="Click Here"  col="2" (tap)="goToForgotPassword()" class="small link" ></Label>
+        </GridLayout>
+        <GridLayout row="1" class="text-center small" columns="*,5*,4*" paddingTop="15">
+            <Label col="0"></Label>
+            <Label col="1" class="small" text="First time user?"> </Label>
+            <Label text="Click Here"  col="2" class="small link" (tap)="goToSignUp()"></Label>
+        </GridLayout>
+    </GridLayout>
+</StackLayout>

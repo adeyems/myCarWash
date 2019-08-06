@@ -1,0 +1,14 @@
+<StackLayout>
+    <StackLayout paddingBottom="50" paddingTop="20">
+        <Label class="text-center page-title" text="Customer Home Screen"></Label>
+    </StackLayout>
+    <GridLayout paddingBottom="30" rows="auto" columns="*,*">
+        <Button (tap)="goToMakeBooking()" col="0" class="btn btn-primary" text="Make Booking"></Button>
+        <Button class="btn btn-primary" col="1" (tap)="goToManageBooking()" text="Manage Booking"></Button>
+    </GridLayout>
+    <GridLayout paddingBottom="30" rows="auto" columns="*,*">
+        <Button (tap)="goToProvideFeedback()" col="0" class="btn btn-primary" text="Provide Feedback"></Button>
+        <Button class="btn btn-primary" col="1" (tap)="goToProvideRating()" text="Provide rating"></Button>
+    </GridLayout>
+</StackLayout>
+

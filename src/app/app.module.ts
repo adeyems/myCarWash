@@ -11,10 +11,10 @@ import {CustomerLoginComponent} from "~/app/login/customer/customer-login.compon
 import {ManagementLoginComponent} from "~/app/login/management/management-login.component";
 import {SignupComponent} from "~/app/signup/signup.component";
 import {RelevantInfoComponent} from "~/app/relevant-info/relevant-info.component";
-import {PatientHomeScreenComponent} from "~/app/customer-home-screen/patient-home-screen.component";
-import {DoctorHomeScreenComponent} from "~/app/management-home-screen/doctor-home-screen.component";
+import {CustomerHomeScreenComponent} from "~/app/customer-home-screen/customer-home-screen.component";
 import {NativeScriptFormsModule} from "nativescript-angular";
 import {ForgotPasswordComponent} from "~/app/password/forgot-password.component";
+import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer-booking-form.component";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -44,9 +44,9 @@ import {ForgotPasswordComponent} from "~/app/password/forgot-password.component"
         ManagementLoginComponent,
         SignupComponent,
         RelevantInfoComponent,
-        PatientHomeScreenComponent,
-        DoctorHomeScreenComponent,
-        ForgotPasswordComponent
+        CustomerHomeScreenComponent,
+        ForgotPasswordComponent,
+        CustomerBookingFormComponent
     ],
     providers: [],
     schemas: [

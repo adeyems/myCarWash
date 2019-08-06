@@ -24,7 +24,6 @@ export class CustomerLoginComponent implements OnInit {
     constructor(
         private router: RouterExtensions,
         private authService: AuthService,
-        private activatedRoute: ActivatedRoute
     ) {
     }
 

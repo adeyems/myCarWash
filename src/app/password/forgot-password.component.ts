@@ -28,11 +28,7 @@ export class ForgotPasswordComponent implements OnInit {
             email: new FormControl(null, {
                 updateOn: 'blur',
                 validators: [Validators.required, Validators.email]
-            }),
-        });
-
-        this.form.get('email').statusChanges.subscribe(status => {
-            this.emailControlIsValid = status === 'VALID';
+            })
         });
 
     }
@@ -47,9 +43,6 @@ export class ForgotPasswordComponent implements OnInit {
     async onSubmit() {
         this.emailEl.nativeElement.focus();
 
-        if (!this.form.valid) {
-            return;
-        }
 
         this.form.reset();
         this.emailControlIsValid = true;

@@ -37,3 +37,15 @@
     width: 90%;
     color: red;
 }
+
+.table-head {
+    background-color: lightgreen;
+}
+
+.odd {
+    background-color: #D5F2D3;
+}
+
+.even {
+    background-color: #EFEFEF
+}

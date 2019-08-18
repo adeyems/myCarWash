@@ -1,9 +1,12 @@
+<ActionBar class="action-bar">
+    <GridLayout rows="*" columns="2*,5*,*">
+        <Image src="res://icon" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>
+        <Label class="text-center action-bar-title" row="0" col="1" verticalAlignment="center" textWrap="true" text="Customer Registration Screen"></Label>
+    </GridLayout>
+</ActionBar>
 
 <ScrollView>
-    <StackLayout class="page page-icon form" [formGroup]="form" paddingBottom="10">
-        <StackLayout paddingBottom="50" paddingTop="10" >
-            <Label class="text-center page-title" text="Customer Registration Screen"></Label>
-        </StackLayout>
+    <StackLayout class="page page-icon form" [formGroup]="form" paddingBottom="10" paddingTop="50">
         <StackLayout>
             <TextField
                     class="input input-field"
@@ -35,19 +38,20 @@
             ></Label>
         </StackLayout>
         <StackLayout>
-            <TextField
-                    class="input input-field"
-                    returnKeyType="next"
-                    keyboardType="phone"
-                    [autocorrect]="false"
-                    autocapitalizationType="none"
-                    formControlName="phone"
-                    hint="Mobile Number: +234/+353 *** **** ***"
-                    #phoneEl
+            <TextField col="1" row="1"
+                       class="input input-field"
+                       returnKeyType="next"
+                       keyboardType="phone"
+                       [autocorrect]="false"
+                       autocapitalizationType="none"
+                       formControlName="phone"
+                       hint="Mobile Number"
+                       [text]="phone"
+                       #phoneEl
             ></TextField>
             <Label  class="input-error"
                     *ngIf="!phoneControlIsValid"
-                    text="Must be 14+ characters long including country code"
+                    text="Mobile Number Invalid"
             ></Label>
         </StackLayout>
         <StackLayout>
@@ -102,7 +106,7 @@
             ></Label>
         </StackLayout>
         <Button
-                class="btn password-login-button"
+                class="btn btn-main"
                 text="Submit"
                 (tap)="onSubmit()"
                 [disabled]="!form.valid"

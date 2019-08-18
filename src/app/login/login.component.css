@@ -1,3 +1,9 @@
 Label {
     font-size: 15px;
 }
+
+.title {
+    font-size: 25%;
+    color: black;
+    font-family: "Al Bayan";
+}

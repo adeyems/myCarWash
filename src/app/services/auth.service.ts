@@ -65,12 +65,13 @@ export class AuthService {
                 tap(resData => {
                     if (resData && resData.idToken) {
                         alert("Your Account was created successfully").catch();
-                        this.router.navigate(['patientLogin'])
-                        /*return this.createNewUser(name, surname, phone, email, password, resData)
+                        this.router.navigate(['patientLogin']);
+
+                        return this.createNewUser(name, surname, phone, email, password, resData)
                             .subscribe( resData => {
                                 console.log(resData);
                                 alert("Your Account was created successfully").catch();
-                            })*/
+                            })
                     }
                 })
             );
@@ -103,7 +104,7 @@ export class AuthService {
         if (this.tokenExpirationTimer) {
             clearTimeout(this.tokenExpirationTimer);
         }
-        this.router.navigate(['login'], { clearHistory: true }).catch(error => console.log(error));
+        this.router.navigate([''], { clearHistory: true }).catch(error => console.log(error));
     }
 
     autoLogin() {
@@ -161,9 +162,9 @@ export class AuthService {
         }
     }
 
-    public createNewUser() {
-        const newPatient = new CustomerModel("wqdewfretgryhtuyrtgerfedasw", "name", "surname", "phone", "email", new Date());
-       // const newPatient = new CustomerModel(resData.localId, name, surname, phone, email, new Date());
+    public createNewUser(name, surname, phone, email, resData, password) {
+       // const newPatient = new CustomerModel("wqdewfretgryhtuyrtgerfedasw", "name", "surname", "phone", "email", new Date());
+        const newPatient = new CustomerModel(resData.localId, name, surname, phone, email, password, new Date());
         return this.http.post(
             `${AuthService.Config.FIREBASE_URL}/data.json`, {newPatient}
         ).pipe(

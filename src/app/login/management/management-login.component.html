@@ -1,7 +1,10 @@
-<StackLayout class="page page-icon form" [formGroup]="form" paddingBottom="20">
-    <StackLayout paddingBottom="50" paddingTop="20" >
-        <Label class="text-center page-title" text="Management Login"></Label>
-    </StackLayout>
+<ActionBar class="action-bar">
+    <GridLayout rows="*" columns="2*,5*,*">
+        <Image src="res://icon" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>
+        <Label class="text-center action-bar-title" row="0" col="1" verticalAlignment="center" textWrap="true" text="Management Login"></Label>
+    </GridLayout>
+</ActionBar>
+<StackLayout paddingTop="50" class="page page-icon form" [formGroup]="form" paddingBottom="20">
     <StackLayout>
         <TextField
                 class="input input-field"
@@ -37,7 +40,7 @@
         ></Label>
     </StackLayout>
     <Button
-            class="btn password-login-button"
+            class="btn btn-main"
             text="Login"
             (tap)="onSubmit()"
             [disabled]="!form.valid"
@@ -46,7 +49,7 @@
         <GridLayout row="0" class="text-center small" columns="*,4*,3*">
             <Label col="0"></Label>
             <Label col="1" class="small" text="Forgot Password?"> </Label>
-            <Label text="Click Here"  (tap)="goToForgotPassword()" col="2" class="small link" ></Label>
+            <Label text="Click Here"  col="2" (tap)="goToForgotPassword()" class="small link" ></Label>
         </GridLayout>
     </GridLayout>
     <ActivityIndicator [busy]="isLoading"></ActivityIndicator>

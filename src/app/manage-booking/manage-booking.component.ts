@@ -9,10 +9,10 @@ import {ActivatedRoute} from "@angular/router";
 @Component({
     selector: "Home",
     moduleId: module.id,
-    templateUrl: "./customer-booking-form.component.html",
-    styleUrls: ["./customer-booking-form.component.css"]
+    templateUrl: "./manage-booking.component.html",
+    styleUrls: ["./manage-booking.component.css"]
 })
-export class CustomerBookingFormComponent implements OnInit {
+export class ManageBookingComponent implements OnInit {
     form: FormGroup;
     emailControlIsValid = true;
     passwordControlIsValid = true;
@@ -86,6 +86,7 @@ export class CustomerBookingFormComponent implements OnInit {
         this.passwordEl.nativeElement.focus();
         this.passwordEl.nativeElement.dismissSoftInput();
     }
+
 
     onLogout() {
         this.authService.logout();

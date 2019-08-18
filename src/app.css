@@ -48,3 +48,18 @@ refer to http://docs.nativescript.org/ui/theme.
 Label {
     font-size: 12px;
 }
+
+.btn-main {
+    color: #F5F5F5;
+    background-color: #000000;
+    width: 500px;
+    height: 200px;
+    padding: 10px 31px 10px 31px;
+    border-width: 3px;
+}
+
+.title {
+    font-size: 25%;
+    color: black;
+    font-family: "Al Bayan";
+}

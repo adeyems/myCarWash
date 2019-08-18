@@ -9,6 +9,7 @@ import {CustomerHomeScreenComponent} from "~/app/customer-home-screen/customer-h
 import {RelevantInfoComponent} from "~/app/relevant-info/relevant-info.component";
 import {ForgotPasswordComponent} from "~/app/password/forgot-password.component";
 import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer-booking-form.component";
+import {ManageBookingComponent} from "~/app/manage-booking/manage-booking.component";
 
 const routes: Routes = [
     { path: "managementLogin", component: ManagementLoginComponent },
@@ -17,9 +18,9 @@ const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: "customerSignup", component: SignupComponent },
     { path: "customerHome", component:  CustomerHomeScreenComponent},
-    { path: "customerSignup", component: SignupComponent },
     { path: "relevantInfo", component: RelevantInfoComponent},
     { path: "customerBookingForm", component: CustomerBookingFormComponent},
+    { path: "manage-booking", component: ManageBookingComponent},
     { path: "", redirectTo: "/login", pathMatch: "full" },
 ];
 

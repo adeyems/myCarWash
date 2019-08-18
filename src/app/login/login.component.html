@@ -1,9 +1,13 @@
+<ActionBar class="action-bar">
+    <GridLayout rows="*" columns="2*,5*,*">
+        <Image src="res://icon" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>
+        <Label class="text-center action-bar-title" row="0" col="1" verticalAlignment="center" textWrap="true" text="Login"></Label>
+    </GridLayout>
+</ActionBar>
+
 <StackLayout>
-    <StackLayout paddingBottom="50" paddingTop="20">
-        <Label class="text-center page-title" text="Login"></Label>
-    </StackLayout>
-    <GridLayout paddingBottom="30" rows="auto" columns="*,*">
-        <Button (tap)="goToCustomerLogin()" col="0" class="btn btn-primary" text="Customer"></Button>
-        <Button class="btn btn-primary" col="1" (tap)="goToManagementLogin()" text="Management"></Button>
+    <GridLayout paddingBottom="30" paddingTop="60" rows="auto" columns="*,*">
+        <Button (tap)="goToCustomerLogin()" col="0" class="btn btn-main" text="Customer"></Button>
+        <Button class="btn btn-main" col="1" (tap)="goToManagementLogin()" text="Management"></Button>
     </GridLayout>
 </StackLayout>

@@ -96,7 +96,7 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     goToManageBooking() {
-
+        this.router.navigate(["manage-booking"]);
     }
 
     goToProvideFeedback() {
@@ -105,5 +105,9 @@ export class CustomerHomeScreenComponent implements OnInit {
 
     goToProvideRating() {
 
+    }
+
+    onLogout() {
+        this.authService.logout();
     }
 }

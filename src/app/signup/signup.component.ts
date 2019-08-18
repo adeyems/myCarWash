@@ -20,6 +20,7 @@ export class SignupComponent implements OnInit {
     passwordControlIsValid = true;
     confirmPasswordControlIsValid = true;
     isLoading = false;
+    phone = "+353";
     @ViewChild("nameEl", {static: false}) nameEl: ElementRef<TextField>;
     @ViewChild("surnameEl", {static: false}) surnameEl: ElementRef<TextField>;
     @ViewChild("phoneEl", {static: false}) phoneEl: ElementRef<TextField>;
@@ -146,10 +147,10 @@ export class SignupComponent implements OnInit {
     }
 
     newUser(){
-        console.log("clicked");
+      /*  console.log("clicked");
         this.authService.createNewUser().subscribe(
             resData => {
                 console.log(resData);
-            });
+            });*/
     }
 }

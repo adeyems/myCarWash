@@ -1,14 +1,18 @@
-<StackLayout>
-    <StackLayout paddingBottom="50" paddingTop="20">
-        <Label class="text-center page-title" text="Customer Home Screen"></Label>
-    </StackLayout>
+<ActionBar class="action-bar">
+    <GridLayout rows="*" columns="2*,5*,*">
+        <Image src="res://icon" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>
+        <Image src="res://account" class="account-icon" row="0" verticalAlignment="center" col="2" stretch="aspectFill" (tap)="onLogout()"></Image>
+        <Label class="text-center action-bar-title" row="0" col="1" verticalAlignment="center" textWrap="true" text="Customer Home Screen"></Label>
+    </GridLayout>
+</ActionBar>
+<StackLayout paddingTop="50">
     <GridLayout paddingBottom="30" rows="auto" columns="*,*">
-        <Button (tap)="goToMakeBooking()" col="0" class="btn btn-primary" text="Make Booking"></Button>
-        <Button class="btn btn-primary" col="1" (tap)="goToManageBooking()" text="Manage Booking"></Button>
+        <Button (tap)="goToMakeBooking()" col="0" class="btn btn-main" text="Make Booking"></Button>
+        <Button class="btn btn-main" col="1" (tap)="goToManageBooking()" text="Manage Booking"></Button>
     </GridLayout>
     <GridLayout paddingBottom="30" rows="auto" columns="*,*">
-        <Button (tap)="goToProvideFeedback()" col="0" class="btn btn-primary" text="Provide Feedback"></Button>
-        <Button class="btn btn-primary" col="1" (tap)="goToProvideRating()" text="Provide rating"></Button>
+        <Button (tap)="goToProvideFeedback()" col="0" class="btn btn-main" text="Provide Feedback"></Button>
+        <Button class="btn btn-main" col="1" (tap)="goToProvideRating()" text="Provide rating"></Button>
     </GridLayout>
 </StackLayout>
 

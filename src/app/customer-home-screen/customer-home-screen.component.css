@@ -37,3 +37,8 @@
     width: 90%;
     color: red;
 }
+
+.customer-name {
+    font-size: 10%;
+    font-family: "Arial Black";
+}

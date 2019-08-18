@@ -67,7 +67,7 @@ export class AuthService {
                         alert("Your Account was created successfully").catch();
                         this.router.navigate(['patientLogin']);
 
-                        return this.createNewUser(name, surname, phone, email, password, resData)
+                        return this.createNewUser(name, surname, phone, email, resData)
                             .subscribe( resData => {
                                 console.log(resData);
                                 alert("Your Account was created successfully").catch();
@@ -96,6 +96,16 @@ export class AuthService {
                     }
                 })
             );
+    }
+
+    checkUserType(email: string, userType: 'customers' | 'managements') {
+        return this.http.get(`${AuthService.Config.FIREBASE_URL}/${userType}.json`)
+        .pipe(
+            catchError(errorRes => {
+                AuthService.handleError(errorRes.error.error.message);
+                return throwError(errorRes);
+            })
+        );
     }
 
     logout() {
@@ -164,9 +174,9 @@ export class AuthService {
 
     public createNewUser(name, surname, phone, email, resData, password) {
        // const newPatient = new CustomerModel("wqdewfretgryhtuyrtgerfedasw", "name", "surname", "phone", "email", new Date());
-        const newPatient = new CustomerModel(resData.localId, name, surname, phone, email, password, new Date());
+        const newCustomer = new CustomerModel(resData.localId, name, surname, phone, email, new Date());
         return this.http.post(
-            `${AuthService.Config.FIREBASE_URL}/data.json`, {newPatient}
+            `${AuthService.Config.FIREBASE_URL}/customers.json`, newCustomer
         ).pipe(
             catchError(errorRes => {
                 console.log(errorRes);

@@ -172,7 +172,7 @@ export class AuthService {
         }
     }
 
-    public createNewUser(name, surname, phone, email, resData, password) {
+    public createNewUser(name, surname, phone, email, resData) {
        // const newPatient = new CustomerModel("wqdewfretgryhtuyrtgerfedasw", "name", "surname", "phone", "email", new Date());
         const newCustomer = new CustomerModel(resData.localId, name, surname, phone, email, new Date());
         return this.http.post(

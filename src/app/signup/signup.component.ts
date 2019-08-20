@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TextField} from "tns-core-modules/ui/text-field";
 import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
+import {PasswordValidator} from "~/app/shared/validator";
 
 @Component({
     selector: "Home",
@@ -52,19 +53,19 @@ export class SignupComponent implements OnInit {
             }),
             phone: new FormControl(null, {
                 updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(14)]
+                validators: [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern("^(\\+35308(3|5|6|7|9))")]
             }),
             email: new FormControl(null, {
                 updateOn: 'blur',
-                validators: [Validators.required, Validators.email]
+                validators: [Validators.required, Validators.email, Validators.pattern("(\\W|^)[\\w.+\\-]*@(gmail|yahoo|hotmail|outlook)\\.com(\\W|$)")]
             }),
             password: new FormControl(null, {
                 updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(8), Validators.pattern("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$")]
+                validators: [Validators.required, Validators.minLength(8), Validators.pattern("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!~`^+=<>?;:{}/\\\\|[\\]@*#\\$%\\^&\\*\\-\\_]).{8,15}$")]
             }),
             confirmPassword: new FormControl(null, {
                 updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(8)]
+                validators: [Validators.required, Validators.minLength(8), PasswordValidator('password')]
             })
         });
 
@@ -152,5 +153,12 @@ export class SignupComponent implements OnInit {
             resData => {
                 console.log(resData);
             });*/
+    }
+
+    checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+        let pass = group.controls.password.value;
+        let confirmPass = group.controls.confirmPass.value;
+
+        return pass === confirmPass ? null : { notSame: true }
     }
 }

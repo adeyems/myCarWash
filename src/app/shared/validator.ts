@@ -1,24 +1,41 @@
-import { Injectable, ViewContainerRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+/** A hero's name can't match the given regular expression */
+import {AbstractControl, FormControl, ValidatorFn} from "@angular/forms";
 
-@Injectable({ providedIn: 'root' })
-export class UIService {
-  private _drawerState = new BehaviorSubject<void>(null);
-  private _rootVCRef: ViewContainerRef;
+export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+        const forbidden = nameRe.test(control.value);
+        return forbidden ? {'forbiddenName': {value: control.value}} : null;
+    };
+}
 
-  get drawerState() {
-    return this._drawerState.asObservable();
-  }
+export function PasswordValidator(confirmPasswordInput: string) {
+    let confirmPasswordControl: FormControl;
+    let passwordControl: FormControl;
 
-  toggleDrawer() {
-    this._drawerState.next(null);
-  }
+    return (control: FormControl) => {
+        if (!control.parent) {
+            return null;
+        }
 
-  setRootVCRef(vcRef: ViewContainerRef) {
-    this._rootVCRef = vcRef;
-  }
+        if (!confirmPasswordControl) {
+            confirmPasswordControl = control;
+            passwordControl = control.parent.get(confirmPasswordInput) as FormControl;
+            passwordControl.valueChanges.subscribe(() => {
+                confirmPasswordControl.updateValueAndValidity();
+            });
+        }
 
-  getRootVCRef() {
-    return this._rootVCRef;
-  }
+        if (
+            passwordControl.value !==
+            confirmPasswordControl.value
+        ) {
+            return {
+                notMatch: true
+            };
+        }
+        return null;
+    };
+}
+
+export function phoneValidator(phone: string) {
 }

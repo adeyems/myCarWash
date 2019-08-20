@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TextField} from "tns-core-modules/ui/text-field";
 import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
+import { getString } from "tns-core-modules/application-settings/application-settings";
+import { DataService } from "../services/data.service";
 
 @Component({
     selector: "Home",
@@ -13,19 +15,81 @@ import {ActivatedRoute} from "@angular/router";
     styleUrls: ["./customer-booking-form.component.css"]
 })
 export class CustomerBookingFormComponent implements OnInit {
-    form: FormGroup;
-    emailControlIsValid = true;
-    passwordControlIsValid = true;
     isLoading = false;
-    @ViewChild("passwordEl", {static: false}) passwordEl: ElementRef<TextField>;
-    @ViewChild("emailEl", {static: false}) emailEl: ElementRef<TextField>;
     pageTitle: string;
-    public currentUser: string;
+    currentUser: string;
+    selectedSlot: any;
+    timeRange = {
+        a: [
+            { day: 0, time: '9:00 - 9:30' },
+            { day: 1, time: '9:00 - 9:30' },
+            { day: 2, time: '9:00 - 9:30' },
+            { day: 3, time: '9:00 - 9:30' },
+            { day: 4, time: '9:00 - 9:30' }
+        ],
+        b: [
+            { day: 0, time: '9:30 - 10:00' },
+            { day: 1, time: '9:30 - 10:00' },
+            { day: 2, time: '9:30 - 10:00' },
+            { day: 3, time: '9:30 - 10:00' },
+            { day: 4, time: '9:30 - 10:00' }
+        ],
+        c: [
+            { day: 0, time: '10:00 - 10:30' },
+            { day: 1, time: '10:00 - 10:30' },
+            { day: 2, time: '10:00 - 10:30' },
+            { day: 3, time: '10:00 - 10:30' },
+            { day: 4, time: '10:00 - 10:30' }
+        ],
+        d: [
+            { day: 0, time: '10:30 - 11:00' },
+            { day: 1, time: '10:30 - 11:00' },
+            { day: 2, time: '10:30 - 11:00' },
+            { day: 3, time: '10:30 - 11:00' },
+            { day: 4, time: '10:30 - 11:00' }
+        ],
+        e: [
+            { day: 0, time: '11:00 - 11:30' },
+            { day: 1, time: '11:00 - 11:30' },
+            { day: 2, time: '11:00 - 11:30' },
+            { day: 3, time: '11:00 - 11:30' },
+            { day: 4, time: '11:00 - 11:30' }
+        ],
+        f: [
+            { day: 0, time: '11:30 - 12:00' },
+            { day: 1, time: '11:30 - 12:00' },
+            { day: 2, time: '11:30 - 12:00' },
+            { day: 3, time: '11:30 - 12:00' },
+            { day: 4, time: '11:30 - 12:00' }
+        ],
+        g: [
+            { day: 0, time: '12:00 - 12:30' },
+            { day: 1, time: '12:00 - 12:30' },
+            { day: 2, time: '12:00 - 12:30' },
+            { day: 3, time: '12:00 - 12:30' },
+            { day: 4, time: '12:00 - 12:30' }
+        ],
+        h: [
+            { day: 0, time: '12:30 - 1:00' },
+            { day: 1, time: '12:30 - 1:00' },
+            { day: 2, time: '12:30 - 1:00' },
+            { day: 3, time: '12:30 - 1:00' },
+            { day: 4, time: '12:30 - 1:00' }
+        ],
+        i: [
+            { day: 0, time: '1:00 - 1:30' },
+            { day: 1, time: '1:00 - 1:30' },
+            { day: 2, time: '1:00 - 1:30' },
+            { day: 3, time: '1:00 - 1:30' },
+            { day: 4, time: '1:00 - 1:30' }
+        ],
+    }
 
     constructor(
         private router: RouterExtensions,
         private authService: AuthService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private dataService: DataService
     ) {
         this.activatedRoute.queryParams.subscribe( params => {
             this.currentUser = params["user"];
@@ -34,57 +98,32 @@ export class CustomerBookingFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.form = new FormGroup({
-            email: new FormControl(null, {
-                updateOn: 'blur',
-                validators: [Validators.required, Validators.email]
-            }),
-            password: new FormControl(null, {
-                updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(6)]
-            })
-        });
-
-        this.form.get('email').statusChanges.subscribe(status => {
-            this.emailControlIsValid = status === 'VALID';
-        });
-
-        this.form.get('password').statusChanges.subscribe(status => {
-            this.passwordControlIsValid = status === 'VALID';
+        // this.customerId = JSON.parse(getString('userData'))['id'];
+        this.dataService.getBookings().subscribe(response => {
+            console.log('response: ', response);
+        }, error => {
+            console.log('error: ', error);
         });
     }
 
-    onSubmit() {
-        this.emailEl.nativeElement.focus();
-        this.passwordEl.nativeElement.focus();
-        this.passwordEl.nativeElement.dismissSoftInput();
+    onSelectSlot(key: 'string', day: number, time: string) {
+        let bookingObj = {
+            bookedDay: day,
+            timeSlot: time
+        }
+        this.selectedSlot = {
+            key: key,
+            value: bookingObj
+        }
+        // this.dataService.saveBooking(bookingObj);
+    }
 
-        if (!this.form.valid) {
+    onConfirmSlot() {
+        if (!this.selectedSlot) {
+            alert('Please select a time slot');
             return;
         }
-
-        const email = this.form.get('email').value;
-        const password = this.form.get('password').value;
-        this.form.reset();
-        this.emailControlIsValid = true;
-        this.passwordControlIsValid = true;
-        this.isLoading = true;
-        this.authService.login(email, password).subscribe(
-            resData => {
-                this.isLoading = false;
-                this.router.navigate(['/challenges'], { clearHistory: true }).then();
-            },
-            err => {
-                console.log(err);
-                this.isLoading = false;
-            }
-        );
-    }
-
-    onDone() {
-        this.emailEl.nativeElement.focus();
-        this.passwordEl.nativeElement.focus();
-        this.passwordEl.nativeElement.dismissSoftInput();
+        this.dataService.saveBooking(this.selectedSlot.value);
     }
 
     onLogout() {

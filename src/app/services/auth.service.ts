@@ -66,8 +66,7 @@ export class AuthService {
                     if (resData && resData.idToken) {
                         alert("Your Account was created successfully").catch();
                         this.router.navigate(['patientLogin']);
-
-                        return this.createNewUser(name, surname, phone, email, password, resData)
+                        return this.createNewUser(name, surname, phone, email, resData)
                             .subscribe( resData => {
                                 console.log(resData);
                                 alert("Your Account was created successfully").catch();
@@ -96,6 +95,16 @@ export class AuthService {
                     }
                 })
             );
+    }
+
+    checkUserType(email: string, userType: 'customers' | 'managements') {
+        return this.http.get(`${AuthService.Config.FIREBASE_URL}/${userType}.json`)
+        .pipe(
+            catchError(errorRes => {
+                AuthService.handleError(errorRes.error.error.message);
+                return throwError(errorRes);
+            })
+        );
     }
 
     logout() {
@@ -143,7 +152,7 @@ export class AuthService {
         expiresIn: number
     ) {
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-        const user = new UserModel(email, userId, token, expirationDate);
+        const user = new UserModel(userId, email, token, expirationDate);
         setString('userData', JSON.stringify(user));
         this.autoLogout(user.timeToExpiry);
         this._user.next(user);
@@ -162,11 +171,11 @@ export class AuthService {
         }
     }
 
-    public createNewUser(name, surname, phone, email, resData, password) {
+    public createNewUser(name, surname, phone, email, resData) {
        // const newPatient = new CustomerModel("wqdewfretgryhtuyrtgerfedasw", "name", "surname", "phone", "email", new Date());
-        const newPatient = new CustomerModel(resData.localId, name, surname, phone, email, password, new Date());
+        const newCustomer = new CustomerModel(resData.localId, name, surname, phone, email, new Date());
         return this.http.post(
-            `${AuthService.Config.FIREBASE_URL}/data.json`, {newPatient}
+            `${AuthService.Config.FIREBASE_URL}/customers/${resData.localId}.json`, newCustomer
         ).pipe(
             catchError(errorRes => {
                 console.log(errorRes);

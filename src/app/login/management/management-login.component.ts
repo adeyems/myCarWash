@@ -70,17 +70,35 @@ export class ManagementLoginComponent implements OnInit {
         this.emailControlIsValid = true;
         this.passwordControlIsValid = true;
         this.isLoading = true;
-        this.authService.login(email, password).subscribe(
-            resData => {
-                console.log(resData);
-                this.isLoading = false;
-                this.router.navigate(['managementHome'], { clearHistory: true }).then();
-            },
-            err => {
-                console.log(err);
-                this.isLoading = false;
-            }
-        );
+        this.authService.checkUserType(email, 'managements')
+            .subscribe(response => {
+                const keys = Object.keys(response);
+                let matchFound: boolean = false;
+                for (let i = 0; i < keys.length; i++) {
+                    let key = keys[i];
+                    // console.log('????????',keys[i]);
+                    if (response[key].email == email) {
+                        matchFound = true;
+                        break;
+                    }
+                }
+                // console.log('@@@@@@@',matchFound);
+                if (!matchFound) {
+                    alert('User not recognized!!!');
+                    return;
+                }
+            this.authService.login(email, password).subscribe(
+                resData => {
+                    console.log(resData);
+                    this.isLoading = false;
+                    this.router.navigate(['managementHome'], { clearHistory: true }).then();
+                },
+                err => {
+                    console.log(err);
+                    this.isLoading = false;
+                }
+            );
+        });
     }
 
     onDone() {

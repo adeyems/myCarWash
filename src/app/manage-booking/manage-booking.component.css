@@ -41,6 +41,10 @@
 .table-head {
     background-color: ghostwhite;
     color: #303030;
+    width: 100%;
+}
+.table-head > .item {
+    width: 20%;
 }
 
 .odd {

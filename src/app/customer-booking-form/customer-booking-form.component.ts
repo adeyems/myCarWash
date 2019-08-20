@@ -104,6 +104,11 @@ export class CustomerBookingFormComponent implements OnInit {
         }, error => {
             console.log('error: ', error);
         });
+
+        const monthFirstWeekDay = new Date(
+            new Date().getFullYear(),
+            new Date().getMonth(), 1).getDay();
+        console.log(new Date().getFullYear(),'*****',new Date().getMonth(),'---',monthFirstWeekDay);
     }
 
     onSelectSlot(key: 'string', day: number, time: string) {

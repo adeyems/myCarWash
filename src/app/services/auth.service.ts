@@ -76,7 +76,7 @@ export class AuthService {
             );
     }
 
-    login(email: string, password: string) {
+    login(email: string, password: string, users?: string[]) {
         return this.http
             .post<AuthResponseData>(
                 AuthService.Config.SIGNIN_URL,
@@ -90,14 +90,16 @@ export class AuthService {
                 tap(resData => {
                     if (resData && resData.idToken) {
                         console.log(resData);
-                        alert("Welcome").catch();
-                        this.handleLogin(email, resData.idToken, resData.localId, 3600)
+                        // alert("Welcome").catch();
+                        if (users.indexOf(resData.localId) > -1) {
+                            this.handleLogin(email, resData.idToken, resData.localId, 3600)
+                        }
                     }
                 })
             );
     }
 
-    checkUserType(email: string, userType: 'customers' | 'managements') {
+    checkUserType(userType: 'customers' | 'managements') {
         return this.http.get(`${AuthService.Config.FIREBASE_URL}/${userType}.json`)
         .pipe(
             catchError(errorRes => {

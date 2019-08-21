@@ -52,7 +52,7 @@
 }
 .th-item.is-selected {
     color: white;
-    background-color: green;
+    background-color: red;
 }
 
 .odd {

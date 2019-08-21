@@ -21,7 +21,7 @@
 }
 
 .input {
-    border-color: #226600;
+    border-color: red;
     width: 90%;
     height: 200px;
     border-radius: 8%;
@@ -52,7 +52,7 @@
 }
 .th-item.is-selected {
     color: white;
-    background-color: green;
+    background-color: red;
 }
 
 .odd {

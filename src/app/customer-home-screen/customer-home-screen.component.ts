@@ -54,33 +54,6 @@ export class CustomerHomeScreenComponent implements OnInit {
         });
     }
 
-    onSubmit() {
-        this.emailEl.nativeElement.focus();
-        this.passwordEl.nativeElement.focus();
-        this.passwordEl.nativeElement.dismissSoftInput();
-
-        if (!this.form.valid) {
-            return;
-        }
-
-        const email = this.form.get('email').value;
-        const password = this.form.get('password').value;
-        this.form.reset();
-        this.emailControlIsValid = true;
-        this.passwordControlIsValid = true;
-        this.isLoading = true;
-        this.authService.login(email, password).subscribe(
-            resData => {
-                this.isLoading = false;
-                this.router.navigate(['/challenges'], { clearHistory: true }).then();
-            },
-            err => {
-                console.log(err);
-                this.isLoading = false;
-            }
-        );
-    }
-
     onDone() {
         this.emailEl.nativeElement.focus();
         this.passwordEl.nativeElement.focus();
@@ -110,4 +83,5 @@ export class CustomerHomeScreenComponent implements OnInit {
     onLogout() {
         this.authService.logout();
     }
+
 }

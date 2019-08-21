@@ -7,6 +7,7 @@ import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import { getString } from "tns-core-modules/application-settings/application-settings";
 import { DataService } from "../services/data.service";
+import {switchMap, take} from "rxjs/internal/operators";
 
 @Component({
     selector: "Home",
@@ -120,7 +121,7 @@ export class CustomerBookingFormComponent implements OnInit {
             key: key,
             value: bookingObj
         };
-        this.dataService.saveBooking(bookingObj);
+        //this.dataService.saveBooking(bookingObj);
     }
 
     onConfirmSlot() {
@@ -133,5 +134,16 @@ export class CustomerBookingFormComponent implements OnInit {
 
     onLogout() {
         this.authService.logout();
+    }
+
+    getCustomerName() {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+                currentUser => {
+                    if (!currentUser || !currentUser.isAuth) {
+                        return of(null);
+                    }
+                    return currentUser.
     }
 }

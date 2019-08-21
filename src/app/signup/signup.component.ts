@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
             }),
             phone: new FormControl(null, {
                 updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(14), Validators.maxLength(14)]
+                validators: [Validators.required, Validators.minLength(13), Validators.maxLength(14)]
             }),
             email: new FormControl(null, {
                 updateOn: 'blur',

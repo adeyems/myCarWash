@@ -24,7 +24,8 @@ export class ManageBookingComponent implements OnInit {
         seventh: '12:00 - 12:30',
         eight: '12:30 - 1:00',
         ninth: '1:00 - 1:30',
-    }
+
+    };
 
     constructor(
         private router: RouterExtensions,
@@ -32,16 +33,15 @@ export class ManageBookingComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private dataService: DataService
     ) {
-        this.activatedRoute.queryParams.subscribe( params => {
+        this.activatedRoute.queryParams.subscribe(params => {
             this.currentUser = params["user"];
-            console.log('user: ',this.currentUser);
+            console.log('user: ', this.currentUser);
         });
     }
 
     ngOnInit() {
 
     }
-
 
     onLogout() {
         this.authService.logout();

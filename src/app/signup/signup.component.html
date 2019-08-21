@@ -20,6 +20,7 @@
             <Label  class="input-error"
                     *ngIf="!nameControlIsValid"
                     text="Must not be empty."
+                    textWrap="true"
             ></Label>
         </StackLayout>
         <StackLayout>
@@ -38,7 +39,7 @@
             ></Label>
         </StackLayout>
         <StackLayout>
-            <TextField col="1" row="1"
+            <TextField
                        class="input input-field"
                        returnKeyType="next"
                        keyboardType="phone"
@@ -51,7 +52,8 @@
             ></TextField>
             <Label  class="input-error"
                     *ngIf="!phoneControlIsValid"
-                    text="Mobile Number Invalid"
+                    textWrap="true"
+                    text="Must start with +353 and 9 other number characters"
             ></Label>
         </StackLayout>
         <StackLayout>
@@ -69,6 +71,7 @@
                     *ngIf="!emailControlIsValid"
                     class="input-error"
                     text="Please enter a valid email."
+                    textWrap="true"
             ></Label>
         </StackLayout>
         <StackLayout class="">
@@ -85,7 +88,8 @@
             ></TextField>
             <Label  class="input-error"
                     *ngIf="!passwordControlIsValid"
-                    text="Must be 8+ characters long with uppercase, lowercase, and numbers."
+                    textWrap="true"
+                    text="Must be 8+ characters long with uppercase, lowercase, number(s) and special character(s)."
             ></Label>
         </StackLayout>
         <StackLayout class="">

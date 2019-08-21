@@ -85,7 +85,7 @@ export class CustomerBookingFormComponent implements OnInit {
             { day: 3, time: '1:00 - 1:30' },
             { day: 4, time: '1:00 - 1:30' }
         ],
-    }
+    };
 
     constructor(
         private router: RouterExtensions,
@@ -103,7 +103,6 @@ export class CustomerBookingFormComponent implements OnInit {
         this.dataService.getUserInfo('customers')
             .subscribe(res => {
                 this.customerFullName = `${res[Object.keys(res)[0]].name} ${res[Object.keys(res)[0]].surname}`
-                console.log('@@@@@@@',this.customerFullName);
             });
         this.dataService.getBookings().subscribe(response => {
             console.log('response: ', response);
@@ -134,12 +133,12 @@ export class CustomerBookingFormComponent implements OnInit {
         let bookingObj = {
             bookedDay: day,
             timeSlot: time
-        }
+        };
         this.selectedSlot = {
             key: key,
             value: bookingObj
-        }
-        // this.dataService.saveBooking(bookingObj);
+        };
+        //this.dataService.saveBooking(bookingObj);
     }
 
     onConfirmSlot() {

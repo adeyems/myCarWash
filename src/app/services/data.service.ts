@@ -47,8 +47,21 @@ export class DataService {
                     bookingObj
                 )
 
-            }))
-            .subscribe();
+            }));
+    }
+
+    deleteBooking(bookingId: string) {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+            currentUser => {
+                if (!currentUser || !currentUser.isAuth) {
+                    return of(null);
+                }
+                return this.http.delete(
+                    `${DataService.Config.FIREBASE_URL}/bookings/${currentUser.id}/${bookingId}.json?auth=${currentUser.token}`
+                )
+            }));
     }
 
     getUserInfo(userType: 'customers' | 'managements') {

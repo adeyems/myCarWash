@@ -1,9 +1,10 @@
 export class UserModel {
+    public surname: string;
+    public name: string;
+
     constructor(
         public id: string,
         public email: string,
-        public surname: string,
-        public name: string,
         private _token: string,
         private _tokenExpirationDate: Date
     ) {}

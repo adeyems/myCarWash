@@ -19,6 +19,7 @@ export class CustomerBookingFormComponent implements OnInit {
     pageTitle: string;
     currentUser: string;
     customerFullName: string;
+    currentBooking: any;
     selectedSlot: any;
     currentDayofTheWeek: number;
     timeRange = {
@@ -72,18 +73,81 @@ export class CustomerBookingFormComponent implements OnInit {
             { day: 4, time: '12:00 - 12:30' }
         ],
         h: [
-            { day: 0, time: '12:30 - 1:00' },
-            { day: 1, time: '12:30 - 1:00' },
-            { day: 2, time: '12:30 - 1:00' },
-            { day: 3, time: '12:30 - 1:00' },
-            { day: 4, time: '12:30 - 1:00' }
+            { day: 0, time: '12:30 - 13:00' },
+            { day: 1, time: '12:30 - 13:00' },
+            { day: 2, time: '12:30 - 13:00' },
+            { day: 3, time: '12:30 - 13:00' },
+            { day: 4, time: '12:30 - 13:00' }
         ],
         i: [
-            { day: 0, time: '1:00 - 1:30' },
-            { day: 1, time: '1:00 - 1:30' },
-            { day: 2, time: '1:00 - 1:30' },
-            { day: 3, time: '1:00 - 1:30' },
-            { day: 4, time: '1:00 - 1:30' }
+            { day: 0, time: '13:00 - 13:30' },
+            { day: 1, time: '13:00 - 13:30' },
+            { day: 2, time: '13:00 - 13:30' },
+            { day: 3, time: '13:00 - 13:30' },
+            { day: 4, time: '13:00 - 13:30' }
+        ],
+        j: [
+            { day: 0, time: '13:30 - 14:00' },
+            { day: 1, time: '13:30 - 14:00' },
+            { day: 2, time: '13:30 - 14:00' },
+            { day: 3, time: '13:30 - 14:00' },
+            { day: 4, time: '13:30 - 14:00' }
+        ],
+        k: [
+            { day: 0, time: '14:00 - 14:30' },
+            { day: 1, time: '14:00 - 14:30' },
+            { day: 2, time: '14:00 - 14:30' },
+            { day: 3, time: '14:00 - 14:30' },
+            { day: 4, time: '14:00 - 14:30' }
+        ],
+        l: [
+            { day: 0, time: '14:30 - 15:00' },
+            { day: 1, time: '14:30 - 15:00' },
+            { day: 2, time: '14:30 - 15:00' },
+            { day: 3, time: '14:30 - 15:00' },
+            { day: 4, time: '14:30 - 15:00' }
+        ],
+        m: [
+            { day: 0, time: '15:00 - 15:30' },
+            { day: 1, time: '15:00 - 15:30' },
+            { day: 2, time: '15:00 - 15:30' },
+            { day: 3, time: '15:00 - 15:30' },
+            { day: 4, time: '15:00 - 15:30' }
+        ],
+        n: [
+            { day: 0, time: '15:30 - 16:00' },
+            { day: 1, time: '15:30 - 16:00' },
+            { day: 2, time: '15:30 - 16:00' },
+            { day: 3, time: '15:30 - 16:00' },
+            { day: 4, time: '15:30 - 16:00' }
+        ],
+        o: [
+            { day: 0, time: '16:00 - 16:30' },
+            { day: 1, time: '16:00 - 16:30' },
+            { day: 2, time: '16:00 - 16:30' },
+            { day: 3, time: '16:00 - 16:30' },
+            { day: 4, time: '16:00 - 16:30' }
+        ],
+        p: [
+            { day: 0, time: '16:30 - 17:00' },
+            { day: 1, time: '16:30 - 17:00' },
+            { day: 2, time: '16:30 - 17:00' },
+            { day: 3, time: '16:30 - 17:00' },
+            { day: 4, time: '16:30 - 17:00' }
+        ],
+        q: [
+            { day: 0, time: '17:00 - 17:30' },
+            { day: 1, time: '17:00 - 17:30' },
+            { day: 2, time: '17:00 - 17:30' },
+            { day: 3, time: '17:00 - 17:30' },
+            { day: 4, time: '17:00 - 17:30' }
+        ],
+        r: [
+            { day: 0, time: '17:30 - 18:00' },
+            { day: 1, time: '17:30 - 18:00' },
+            { day: 2, time: '17:30 - 18:00' },
+            { day: 3, time: '17:30 - 18:00' },
+            { day: 4, time: '17:30 - 18:00' }
         ],
     };
 
@@ -105,9 +169,12 @@ export class CustomerBookingFormComponent implements OnInit {
                 this.customerFullName = `${res[Object.keys(res)[0]].name} ${res[Object.keys(res)[0]].surname}`
             });
         this.dataService.getBookings().subscribe(response => {
-            console.log('response: ', response);
+            if (response) {
+                this.currentBooking = response;
+                this.selectedSlot = response[Object.keys(response)[0]];
+            }
+
         }, error => {
-            console.log('error: ', error);
         });
 
         let mon = new Date().getMonth();
@@ -130,15 +197,17 @@ export class CustomerBookingFormComponent implements OnInit {
     }
 
     onSelectSlot(key: 'string', day: number, time: string) {
+        if (this.currentBooking) {
+            alert('You have a pending booking. Please go to manage booking to cancel!');
+            return;
+        }
+        let bookedDate = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`;
         let bookingObj = {
+            bookedDate: bookedDate,
             bookedDay: day,
             timeSlot: time
         };
-        this.selectedSlot = {
-            key: key,
-            value: bookingObj
-        };
-        //this.dataService.saveBooking(bookingObj);
+        this.selectedSlot = bookingObj;
     }
 
     onConfirmSlot() {
@@ -146,7 +215,12 @@ export class CustomerBookingFormComponent implements OnInit {
             alert('Please select a time slot');
             return;
         }
-        this.dataService.saveBooking(this.selectedSlot.value);
+        this.dataService.saveBooking(this.selectedSlot).subscribe(res => {
+            alert('Slot Successfully Booked!');
+            this.currentBooking = res;
+        }, err => {
+            alert(err);
+        });
     }
 
     onLogout() {

@@ -23,12 +23,12 @@
                 [class.even]="i%2 == 0">
                 <Label *ngFor="let f of tr.value"
                     [text]="f.time"
-                    [class.is-selected]="selectedSlot?.key == tr.key && selectedSlot?.value.timeSlot == f.time && selectedSlot?.value.bookedDay == f.day"
-                    class="th-item" (tap)="onSelectSlot(tr.key, f.day+1, f.time)"></Label>
+                    [class.is-selected]="selectedSlot?.timeSlot == f.time && selectedSlot?.bookedDay == f.day"
+                    class="th-item" (tap)="onSelectSlot(tr.key, f.day, f.time)"></Label>
             </FlexboxLayout>
         </StackLayout>
-        <StackLayout>
-            <Button class="btn btn-main" text="Confirm" (tap)="onConfirmSlot()"></Button>
+        <StackLayout *ngIf="!currentBooking">
+            <Button class="btn btn-success" text="Confirm" (tap)="onConfirmSlot()"></Button>
         </StackLayout>
     </StackLayout>
 </ScrollView>

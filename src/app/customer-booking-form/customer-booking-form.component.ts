@@ -18,7 +18,9 @@ export class CustomerBookingFormComponent implements OnInit {
     isLoading = false;
     pageTitle: string;
     currentUser: string;
+    customerFullName: string;
     selectedSlot: any;
+    currentDayofTheWeek: number;
     timeRange = {
         a: [
             { day: 0, time: '9:00 - 9:30' },
@@ -98,17 +100,34 @@ export class CustomerBookingFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.customerId = JSON.parse(getString('userData'))['id'];
+        this.dataService.getUserInfo('customers')
+            .subscribe(res => {
+                this.customerFullName = `${res[Object.keys(res)[0]].name} ${res[Object.keys(res)[0]].surname}`
+                console.log('@@@@@@@',this.customerFullName);
+            });
         this.dataService.getBookings().subscribe(response => {
             console.log('response: ', response);
         }, error => {
             console.log('error: ', error);
         });
 
-        const monthFirstWeekDay = new Date(
-            new Date().getFullYear(),
-            new Date().getMonth(), 1).getDay();
-        console.log(new Date().getFullYear(),'*****',new Date().getMonth(),'---',monthFirstWeekDay);
+        let mon = new Date().getMonth();
+        let date = new Date().getDate();
+        let yr = new Date().getFullYear();
+        let day = new Date(yr, mon, date).getDay();
+        let start: number;
+        let end: number;
+        if (day > 0 && day < 6) {
+            start = 0;
+            end = 5;
+        } else if(day == 0) {
+            start = 1;
+            end = 6;
+        }
+        for (let i = 0; i < 5; i++) {
+            start = 2;
+            end = 7;
+        }
     }
 
     onSelectSlot(key: 'string', day: number, time: string) {

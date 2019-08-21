@@ -51,5 +51,19 @@ export class DataService {
             .subscribe();
     }
 
+    getUserInfo(userType: 'customers' | 'managements') {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(currentUser => {
+                if (!currentUser || !currentUser.isAuth) {
+                    return of(null);
+                }
+                return this.http.get<any>(
+                    `${DataService.Config.FIREBASE_URL}/${userType}/${currentUser.id}.json?auth=${currentUser.token}`
+                )
+            })
+        );
+    }
+
 
 }

@@ -8,7 +8,7 @@
 <ScrollView>
     <StackLayout>
         <StackLayout paddingBottom="30" paddingTop="30">
-            <Label class="text-center customer-name" text="Ade Adeoye"></Label>
+            <Label class="text-center customer-name" [text]="customerFullName"></Label>
         </StackLayout>
         <StackLayout>
             <FlexboxLayout class="table-head">
@@ -24,7 +24,7 @@
                 <Label *ngFor="let f of tr.value"
                     [text]="f.time"
                     [class.is-selected]="selectedSlot?.key == tr.key && selectedSlot?.value.timeSlot == f.time && selectedSlot?.value.bookedDay == f.day"
-                    class="th-item" (tap)="onSelectSlot(tr.key, f.day, f.time)"></Label>
+                    class="th-item" (tap)="onSelectSlot(tr.key, f.day+1, f.time)"></Label>
             </FlexboxLayout>
         </StackLayout>
         <StackLayout>

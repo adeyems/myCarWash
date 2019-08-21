@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
             }),
             phone: new FormControl(null, {
                 updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern("^(\\+35308(3|5|6|7|9))")]
+                validators: [Validators.required, Validators.minLength(14), Validators.maxLength(14)]
             }),
             email: new FormControl(null, {
                 updateOn: 'blur',

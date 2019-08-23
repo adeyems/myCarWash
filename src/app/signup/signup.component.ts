@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
             }),
             phone: new FormControl(null, {
                 updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(13), Validators.maxLength(14)]
+                validators: [Validators.required, Validators.minLength(13), Validators.maxLength(13)]
             }),
             email: new FormControl(null, {
                 updateOn: 'blur',
@@ -126,7 +126,7 @@ export class SignupComponent implements OnInit {
             resData => {
                 console.log(resData);
                 this.isLoading = false;
-                this.router.navigate(['patientLogin'], { clearHistory: true }).then();
+                this.router.navigate(['customerLogin'], { clearHistory: true }).then();
 
             },
             err => {
@@ -145,20 +145,5 @@ export class SignupComponent implements OnInit {
         this.confirmPasswordEl.nativeElement.focus();
         this.confirmPasswordEl.nativeElement.dismissSoftInput();
         this.passwordEl.nativeElement.dismissSoftInput();
-    }
-
-    newUser(){
-      /*  console.log("clicked");
-        this.authService.createNewUser().subscribe(
-            resData => {
-                console.log(resData);
-            });*/
-    }
-
-    checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-        let pass = group.controls.password.value;
-        let confirmPass = group.controls.confirmPass.value;
-
-        return pass === confirmPass ? null : { notSame: true }
     }
 }

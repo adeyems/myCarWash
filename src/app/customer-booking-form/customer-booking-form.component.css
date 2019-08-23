@@ -21,7 +21,7 @@
 }
 
 .input {
-    border-color: #226600;
+    border-color: red;
     width: 90%;
     height: 200px;
     border-radius: 8%;
@@ -58,7 +58,7 @@
 .th-item.odd.is-selected,
 .th-item.even.is-selected {
     color: white;
-    background-color: green;
+    background-color: red;
 }
 .th-item.odd.is-booked,
 .th-item.even.is-booked {

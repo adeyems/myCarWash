@@ -65,7 +65,7 @@ export class AuthService {
                 tap(resData => {
                     if (resData && resData.idToken) {
                         alert("Your Account was created successfully").catch();
-                        this.router.navigate(['patientLogin']);
+                        // this.router.navigate(['patientLogin']);
                         return this.createNewUser(name, surname, phone, email, resData)
                             .subscribe( resData => {
                                 console.log(resData);

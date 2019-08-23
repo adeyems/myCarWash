@@ -11,20 +11,47 @@
             <Label class="text-center customer-name" [text]="customerFullName"></Label>
         </StackLayout>
         <StackLayout>
-            <FlexboxLayout class="table-head">
-                <Label text="Mon" class="th-item"></Label>
-                <Label text="Tue" class="th-item"></Label>
-                <Label text="Wed" class="th-item"></Label>
-                <Label text="Thur" class="th-item"></Label>
-                <Label text="Fri" class="th-item"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout *ngFor="let tr of timeRange | keyvalue; let i = index"
-                [class.odd]="i%2 != 0"
-                [class.even]="i%2 == 0">
-                <Label *ngFor="let f of tr.value"
-                    [text]="f.time"
-                    [class.is-selected]="selectedSlot?.timeSlot == f.time && selectedSlot?.bookedDay == f.day"
-                    class="th-item" (tap)="onSelectSlot(tr.key, f.day, f.time)"></Label>
+            <FlexboxLayout class="table-box">
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Mon" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots; let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 1"
+                        [class.is-booked]="bookedSlot.a.indexOf(ts.timeSlot) > -1"
+                        (tap)="onSelectSlot(dateRange[0], 1, ts.timeSlot, 'a')"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Tue" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 2"
+                        [class.is-booked]="bookedSlot.b.indexOf(ts.timeSlot) > -1"
+                        (tap)="onSelectSlot(dateRange[1], 2, ts.timeSlot, 'b')"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Wed" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 3"
+                        [class.is-booked]="bookedSlot.c.indexOf(ts.timeSlot) > -1"
+                        (tap)="onSelectSlot(dateRange[2], 3, ts.timeSlot, 'c')"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Thur" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 4"
+                        [class.is-booked]="bookedSlot.d.indexOf(ts.timeSlot) > -1"
+                        (tap)="onSelectSlot(dateRange[3], 4, ts.timeSlot, 'd')"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Fri" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 5"
+                        [class.is-booked]="bookedSlot.e.indexOf(ts.timeSlot) > -1"
+                        (tap)="onSelectSlot(dateRange[4], 5, ts.timeSlot, 'e')"></Label>
+                </FlexboxLayout>
             </FlexboxLayout>
         </StackLayout>
         <StackLayout *ngIf="!currentBooking">

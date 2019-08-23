@@ -71,9 +71,8 @@ export class CustomerLoginComponent implements OnInit {
         this.emailControlIsValid = true;
         this.passwordControlIsValid = true;
         this.isLoading = true;
-        this.authService.checkUserType('customers')
-            .subscribe(response => {
-                const keys = Object.keys(response);
+        this.authService.checkUserType('customers').subscribe(response => {
+            const keys = Object.keys(response);
             this.authService.login(email, password, keys).subscribe(
                 resData => {
                     this.isLoading = false;

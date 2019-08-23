@@ -11,20 +11,37 @@
             <Label class="text-center customer-name" [text]="customerFullName"></Label>
         </StackLayout>
         <StackLayout>
-            <FlexboxLayout class="table-head">
-                <Label text="Mon" class="th-item"></Label>
-                <Label text="Tue" class="th-item"></Label>
-                <Label text="Wed" class="th-item"></Label>
-                <Label text="Thur" class="th-item"></Label>
-                <Label text="Fri" class="th-item"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout *ngFor="let tr of timeRange | keyvalue; let i = index"
-                [class.odd]="i%2 != 0"
-                [class.even]="i%2 == 0">
-                <Label *ngFor="let f of tr.value"
-                    [text]="f.time"
-                    [class.is-selected]="selectedSlot?.timeSlot == f.time && selectedSlot?.bookedDay == f.day"
-                    class="th-item"></Label>
+            <FlexboxLayout class="table-box">
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Mon" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots; let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 1"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Tue" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 2"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Wed" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 3"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Thur" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 4"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Fri" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 5"></Label>
+                </FlexboxLayout>
             </FlexboxLayout>
         </StackLayout>
         <StackLayout StackLayout *ngIf="currentBooking">

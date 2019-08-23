@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewContainerRef} from "@angular/core";
 import {RouterExtensions} from "nativescript-angular";
 import * as dialogs from "tns-core-modules/ui/dialogs";
+import * as moment from 'moment';
 import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import { DataService } from "../services/data.service";
@@ -16,137 +17,30 @@ export class ManageBookingComponent implements OnInit {
     pageTitle: string;
     public currentUser: string;
     customerFullName: string;
-    selectedSlot: any;
     currentBooking: any;
-    currentDayofTheWeek: number;
-    timeRange = {
-        a: [
-            { day: 0, time: '9:00 - 9:30' },
-            { day: 1, time: '9:00 - 9:30' },
-            { day: 2, time: '9:00 - 9:30' },
-            { day: 3, time: '9:00 - 9:30' },
-            { day: 4, time: '9:00 - 9:30' }
-        ],
-        b: [
-            { day: 0, time: '9:30 - 10:00' },
-            { day: 1, time: '9:30 - 10:00' },
-            { day: 2, time: '9:30 - 10:00' },
-            { day: 3, time: '9:30 - 10:00' },
-            { day: 4, time: '9:30 - 10:00' }
-        ],
-        c: [
-            { day: 0, time: '10:00 - 10:30' },
-            { day: 1, time: '10:00 - 10:30' },
-            { day: 2, time: '10:00 - 10:30' },
-            { day: 3, time: '10:00 - 10:30' },
-            { day: 4, time: '10:00 - 10:30' }
-        ],
-        d: [
-            { day: 0, time: '10:30 - 11:00' },
-            { day: 1, time: '10:30 - 11:00' },
-            { day: 2, time: '10:30 - 11:00' },
-            { day: 3, time: '10:30 - 11:00' },
-            { day: 4, time: '10:30 - 11:00' }
-        ],
-        e: [
-            { day: 0, time: '11:00 - 11:30' },
-            { day: 1, time: '11:00 - 11:30' },
-            { day: 2, time: '11:00 - 11:30' },
-            { day: 3, time: '11:00 - 11:30' },
-            { day: 4, time: '11:00 - 11:30' }
-        ],
-        f: [
-            { day: 0, time: '11:30 - 12:00' },
-            { day: 1, time: '11:30 - 12:00' },
-            { day: 2, time: '11:30 - 12:00' },
-            { day: 3, time: '11:30 - 12:00' },
-            { day: 4, time: '11:30 - 12:00' }
-        ],
-        g: [
-            { day: 0, time: '12:00 - 12:30' },
-            { day: 1, time: '12:00 - 12:30' },
-            { day: 2, time: '12:00 - 12:30' },
-            { day: 3, time: '12:00 - 12:30' },
-            { day: 4, time: '12:00 - 12:30' }
-        ],
-        h: [
-            { day: 0, time: '12:30 - 13:00' },
-            { day: 1, time: '12:30 - 13:00' },
-            { day: 2, time: '12:30 - 13:00' },
-            { day: 3, time: '12:30 - 13:00' },
-            { day: 4, time: '12:30 - 13:00' }
-        ],
-        i: [
-            { day: 0, time: '13:00 - 13:30' },
-            { day: 1, time: '13:00 - 13:30' },
-            { day: 2, time: '13:00 - 13:30' },
-            { day: 3, time: '13:00 - 13:30' },
-            { day: 4, time: '13:00 - 13:30' }
-        ],
-        j: [
-            { day: 0, time: '13:30 - 14:00' },
-            { day: 1, time: '13:30 - 14:00' },
-            { day: 2, time: '13:30 - 14:00' },
-            { day: 3, time: '13:30 - 14:00' },
-            { day: 4, time: '13:30 - 14:00' }
-        ],
-        k: [
-            { day: 0, time: '14:00 - 14:30' },
-            { day: 1, time: '14:00 - 14:30' },
-            { day: 2, time: '14:00 - 14:30' },
-            { day: 3, time: '14:00 - 14:30' },
-            { day: 4, time: '14:00 - 14:30' }
-        ],
-        l: [
-            { day: 0, time: '14:30 - 15:00' },
-            { day: 1, time: '14:30 - 15:00' },
-            { day: 2, time: '14:30 - 15:00' },
-            { day: 3, time: '14:30 - 15:00' },
-            { day: 4, time: '14:30 - 15:00' }
-        ],
-        m: [
-            { day: 0, time: '15:00 - 15:30' },
-            { day: 1, time: '15:00 - 15:30' },
-            { day: 2, time: '15:00 - 15:30' },
-            { day: 3, time: '15:00 - 15:30' },
-            { day: 4, time: '15:00 - 15:30' }
-        ],
-        n: [
-            { day: 0, time: '15:30 - 16:00' },
-            { day: 1, time: '15:30 - 16:00' },
-            { day: 2, time: '15:30 - 16:00' },
-            { day: 3, time: '15:30 - 16:00' },
-            { day: 4, time: '15:30 - 16:00' }
-        ],
-        o: [
-            { day: 0, time: '16:00 - 16:30' },
-            { day: 1, time: '16:00 - 16:30' },
-            { day: 2, time: '16:00 - 16:30' },
-            { day: 3, time: '16:00 - 16:30' },
-            { day: 4, time: '16:00 - 16:30' }
-        ],
-        p: [
-            { day: 0, time: '16:30 - 17:00' },
-            { day: 1, time: '16:30 - 17:00' },
-            { day: 2, time: '16:30 - 17:00' },
-            { day: 3, time: '16:30 - 17:00' },
-            { day: 4, time: '16:30 - 17:00' }
-        ],
-        q: [
-            { day: 0, time: '17:00 - 17:30' },
-            { day: 1, time: '17:00 - 17:30' },
-            { day: 2, time: '17:00 - 17:30' },
-            { day: 3, time: '17:00 - 17:30' },
-            { day: 4, time: '17:00 - 17:30' }
-        ],
-        r: [
-            { day: 0, time: '17:30 - 18:00' },
-            { day: 1, time: '17:30 - 18:00' },
-            { day: 2, time: '17:30 - 18:00' },
-            { day: 3, time: '17:30 - 18:00' },
-            { day: 4, time: '17:30 - 18:00' }
-        ],
-    };
+    selectedSlot: any;
+    dateRange: any[] = [];
+    timeSlots = [
+        { timeSlot: '9:00 - 9:30' },
+        { timeSlot:'9:30 - 10:00' },
+        { timeSlot:'10:00 - 10:30' },
+        { timeSlot:'10:30 - 11:00' },
+        { timeSlot:'11:00 - 11:30' },
+        { timeSlot:'11:30 - 12:00' },
+        { timeSlot:'12:00 - 12:30' },
+        { timeSlot:'12:30 - 13:00' },
+        { timeSlot:'13:00 - 13:30' },
+        { timeSlot:'13:30 - 14:00' },
+        { timeSlot:'14:00 - 14:30' },
+        { timeSlot:'14:30 - 15:00' },
+        { timeSlot:'15:00 - 15:30' },
+        { timeSlot:'15:30 - 16:00' },
+        { timeSlot:'16:00 - 16:30' },
+        { timeSlot:'16:30 - 17:00' },
+        { timeSlot:'17:00 - 17:30' },
+        { timeSlot:'17:30 - 18:00' }
+    ];
+
 
     constructor(
         private router: RouterExtensions,
@@ -165,6 +59,7 @@ export class ManageBookingComponent implements OnInit {
             .subscribe(res => {
                 this.customerFullName = `${res[Object.keys(res)[0]].name} ${res[Object.keys(res)[0]].surname}`
             });
+
         this.dataService.getBookings().subscribe(response => {
             if (response) {
                 this.currentBooking = response;
@@ -173,6 +68,8 @@ export class ManageBookingComponent implements OnInit {
         }, error => {
 
         });
+
+        this.autoGenerateDate();
     }
 
     // onSelectSlot(key: 'string', day: number, time: string) {
@@ -184,6 +81,45 @@ export class ManageBookingComponent implements OnInit {
     //     };
     //     this.selectedSlot = bookingObj;
     // }
+
+    autoGenerateDate() {
+        let mon = new Date().getMonth();
+        let date = new Date().getDate();
+        let yr = new Date().getFullYear();
+        let day = new Date(yr, mon, date).getDay();
+        let startDate;
+        switch(day) {
+            case 0:
+                startDate = moment().add(1, 'days').format('YYYY-M-D');
+                break;
+            case 1:
+                startDate = moment().format('YYYY-M-D');
+                break;
+            case 2:
+                startDate = moment().subtract(1, 'days').format('YYYY-M-D');
+                break;
+            case 3:
+                startDate = moment().subtract(2, 'days').format('YYYY-M-D');
+                break;
+            case 4:
+                startDate = moment().subtract(3, 'days').format('YYYY-M-D');
+                break;
+            case 5:
+                startDate = moment().subtract(4, 'days').format('YYYY-M-D');
+                break;
+            case 6:
+                startDate = moment().add(2, 'days').format('YYYY-M-D');
+                break;
+            default:
+                break;
+
+        }
+        this.dateRange.push(`${startDate}`);
+        for (let i = 1; i < 5; i++) {
+            let temp = moment(startDate).add(i, 'days').format('YYYY-M-D');
+            this.dateRange.push(`${temp}`);
+        }
+    }
 
     onCancelSlot() {
         let options = {

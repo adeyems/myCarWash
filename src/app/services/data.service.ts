@@ -34,6 +34,12 @@ export class DataService {
         );
     }
 
+    getAllBookings() {
+        return this.http.get<any>(
+            `${DataService.Config.FIREBASE_URL}/bookings.json`
+        )
+    }
+
     saveBooking(bookingObj) {
         return this.authService.user.pipe(
             take(1),

@@ -38,31 +38,42 @@
     color: red;
 }
 
-.table-head {
-    background-color: ghostwhite;
-    color: #303030;
+
+.table-box {
     width: 100%;
     justify-content: center;
-    padding: 0;
 }
-.th-item {
-    width: 20%;
+.table-head {
+    background-color: black;
+    color: ghostwhite;
     padding: 10 0;
     align-items: center;
 }
-.th-item.is-selected {
+.th-box {
+    width: 20%;
+}
+.th-item {
+    padding: 10 0;
+    align-items: center;
+}
+.th-item.odd.is-selected,
+.th-item.even.is-selected {
     color: white;
     background-color: green;
 }
-
-.odd {
+.th-item.odd.is-booked,
+.th-item.even.is-booked {
+    color: white;
+    background-color: red;
+}
+.th-item.odd {
     background-color: white;
     color: black;
 }
 
-.even {
-    background-color: black;
-    color: white;
+.th-item.even {
+    background-color: ghostwhite;
+    color: black;
 }
 
 .customer-name {

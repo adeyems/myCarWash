@@ -1,11 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {RouterExtensions} from "nativescript-angular";
-import {of} from "rxjs";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TextField} from "tns-core-modules/ui/text-field";
+import * as moment from 'moment';
 import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
-import { getString } from "tns-core-modules/application-settings/application-settings";
 import { DataService } from "../services/data.service";
 
 @Component({
@@ -18,137 +15,38 @@ export class CustomerBookingFormComponent implements OnInit {
     isLoading = false;
     pageTitle: string;
     currentUser: string;
+
+    customerId: string;
     customerFullName: string;
     currentBooking: any;
     selectedSlot: any;
-    currentDayofTheWeek: number;
-    timeRange = {
-        a: [
-            { day: 0, time: '9:00 - 9:30' },
-            { day: 1, time: '9:00 - 9:30' },
-            { day: 2, time: '9:00 - 9:30' },
-            { day: 3, time: '9:00 - 9:30' },
-            { day: 4, time: '9:00 - 9:30' }
-        ],
-        b: [
-            { day: 0, time: '9:30 - 10:00' },
-            { day: 1, time: '9:30 - 10:00' },
-            { day: 2, time: '9:30 - 10:00' },
-            { day: 3, time: '9:30 - 10:00' },
-            { day: 4, time: '9:30 - 10:00' }
-        ],
-        c: [
-            { day: 0, time: '10:00 - 10:30' },
-            { day: 1, time: '10:00 - 10:30' },
-            { day: 2, time: '10:00 - 10:30' },
-            { day: 3, time: '10:00 - 10:30' },
-            { day: 4, time: '10:00 - 10:30' }
-        ],
-        d: [
-            { day: 0, time: '10:30 - 11:00' },
-            { day: 1, time: '10:30 - 11:00' },
-            { day: 2, time: '10:30 - 11:00' },
-            { day: 3, time: '10:30 - 11:00' },
-            { day: 4, time: '10:30 - 11:00' }
-        ],
-        e: [
-            { day: 0, time: '11:00 - 11:30' },
-            { day: 1, time: '11:00 - 11:30' },
-            { day: 2, time: '11:00 - 11:30' },
-            { day: 3, time: '11:00 - 11:30' },
-            { day: 4, time: '11:00 - 11:30' }
-        ],
-        f: [
-            { day: 0, time: '11:30 - 12:00' },
-            { day: 1, time: '11:30 - 12:00' },
-            { day: 2, time: '11:30 - 12:00' },
-            { day: 3, time: '11:30 - 12:00' },
-            { day: 4, time: '11:30 - 12:00' }
-        ],
-        g: [
-            { day: 0, time: '12:00 - 12:30' },
-            { day: 1, time: '12:00 - 12:30' },
-            { day: 2, time: '12:00 - 12:30' },
-            { day: 3, time: '12:00 - 12:30' },
-            { day: 4, time: '12:00 - 12:30' }
-        ],
-        h: [
-            { day: 0, time: '12:30 - 13:00' },
-            { day: 1, time: '12:30 - 13:00' },
-            { day: 2, time: '12:30 - 13:00' },
-            { day: 3, time: '12:30 - 13:00' },
-            { day: 4, time: '12:30 - 13:00' }
-        ],
-        i: [
-            { day: 0, time: '13:00 - 13:30' },
-            { day: 1, time: '13:00 - 13:30' },
-            { day: 2, time: '13:00 - 13:30' },
-            { day: 3, time: '13:00 - 13:30' },
-            { day: 4, time: '13:00 - 13:30' }
-        ],
-        j: [
-            { day: 0, time: '13:30 - 14:00' },
-            { day: 1, time: '13:30 - 14:00' },
-            { day: 2, time: '13:30 - 14:00' },
-            { day: 3, time: '13:30 - 14:00' },
-            { day: 4, time: '13:30 - 14:00' }
-        ],
-        k: [
-            { day: 0, time: '14:00 - 14:30' },
-            { day: 1, time: '14:00 - 14:30' },
-            { day: 2, time: '14:00 - 14:30' },
-            { day: 3, time: '14:00 - 14:30' },
-            { day: 4, time: '14:00 - 14:30' }
-        ],
-        l: [
-            { day: 0, time: '14:30 - 15:00' },
-            { day: 1, time: '14:30 - 15:00' },
-            { day: 2, time: '14:30 - 15:00' },
-            { day: 3, time: '14:30 - 15:00' },
-            { day: 4, time: '14:30 - 15:00' }
-        ],
-        m: [
-            { day: 0, time: '15:00 - 15:30' },
-            { day: 1, time: '15:00 - 15:30' },
-            { day: 2, time: '15:00 - 15:30' },
-            { day: 3, time: '15:00 - 15:30' },
-            { day: 4, time: '15:00 - 15:30' }
-        ],
-        n: [
-            { day: 0, time: '15:30 - 16:00' },
-            { day: 1, time: '15:30 - 16:00' },
-            { day: 2, time: '15:30 - 16:00' },
-            { day: 3, time: '15:30 - 16:00' },
-            { day: 4, time: '15:30 - 16:00' }
-        ],
-        o: [
-            { day: 0, time: '16:00 - 16:30' },
-            { day: 1, time: '16:00 - 16:30' },
-            { day: 2, time: '16:00 - 16:30' },
-            { day: 3, time: '16:00 - 16:30' },
-            { day: 4, time: '16:00 - 16:30' }
-        ],
-        p: [
-            { day: 0, time: '16:30 - 17:00' },
-            { day: 1, time: '16:30 - 17:00' },
-            { day: 2, time: '16:30 - 17:00' },
-            { day: 3, time: '16:30 - 17:00' },
-            { day: 4, time: '16:30 - 17:00' }
-        ],
-        q: [
-            { day: 0, time: '17:00 - 17:30' },
-            { day: 1, time: '17:00 - 17:30' },
-            { day: 2, time: '17:00 - 17:30' },
-            { day: 3, time: '17:00 - 17:30' },
-            { day: 4, time: '17:00 - 17:30' }
-        ],
-        r: [
-            { day: 0, time: '17:30 - 18:00' },
-            { day: 1, time: '17:30 - 18:00' },
-            { day: 2, time: '17:30 - 18:00' },
-            { day: 3, time: '17:30 - 18:00' },
-            { day: 4, time: '17:30 - 18:00' }
-        ],
+    dateRange: any[] = [];
+    timeSlots = [
+        { timeSlot: '9:00 - 9:30' },
+        { timeSlot:'9:30 - 10:00' },
+        { timeSlot:'10:00 - 10:30' },
+        { timeSlot:'10:30 - 11:00' },
+        { timeSlot:'11:00 - 11:30' },
+        { timeSlot:'11:30 - 12:00' },
+        { timeSlot:'12:00 - 12:30' },
+        { timeSlot:'12:30 - 13:00' },
+        { timeSlot:'13:00 - 13:30' },
+        { timeSlot:'13:30 - 14:00' },
+        { timeSlot:'14:00 - 14:30' },
+        { timeSlot:'14:30 - 15:00' },
+        { timeSlot:'15:00 - 15:30' },
+        { timeSlot:'15:30 - 16:00' },
+        { timeSlot:'16:00 - 16:30' },
+        { timeSlot:'16:30 - 17:00' },
+        { timeSlot:'17:00 - 17:30' },
+        { timeSlot:'17:30 - 18:00' }
+    ];
+    bookedSlot = {
+        a: [],
+        b: [],
+        c: [],
+        d: [],
+        e: []
     };
 
     constructor(
@@ -166,44 +64,71 @@ export class CustomerBookingFormComponent implements OnInit {
     ngOnInit() {
         this.dataService.getUserInfo('customers')
             .subscribe(res => {
+                this.customerId = res[Object.keys(res)[0]].id;
                 this.customerFullName = `${res[Object.keys(res)[0]].name} ${res[Object.keys(res)[0]].surname}`
             });
+
         this.dataService.getBookings().subscribe(response => {
             if (response) {
                 this.currentBooking = response;
                 this.selectedSlot = response[Object.keys(response)[0]];
             }
 
-        }, error => {
+            }, error => {
         });
 
-        let mon = new Date().getMonth();
-        let date = new Date().getDate();
-        let yr = new Date().getFullYear();
-        let day = new Date(yr, mon, date).getDay();
-        let start: number;
-        let end: number;
-        if (day > 0 && day < 6) {
-            start = 0;
-            end = 5;
-        } else if(day == 0) {
-            start = 1;
-            end = 6;
-        }
-        for (let i = 0; i < 5; i++) {
-            start = 2;
-            end = 7;
-        }
+        this.autoGenerateDate();
+
+        this.dataService.getAllBookings().subscribe(res => {
+            delete res[this.customerId];
+            let userIds = Object.keys(res);
+            for (let i = 0; i < userIds.length; i++) {
+                let userBookings = res[userIds[i]];
+                for (let key in userBookings) {
+                    if (this.dateRange.indexOf(userBookings[key].bookedDate) > -1) {
+                        switch(userBookings[key].bookedDay) {
+                            case 1:
+                                this.bookedSlot.a.push(userBookings[key].timeSlot);
+                                break;
+                            case 2:
+                                this.bookedSlot.b.push(userBookings[key].timeSlot);
+                                break;
+                            case 3:
+                                this.bookedSlot.c.push(userBookings[key].timeSlot);
+                                break;
+                            case 4:
+                                this.bookedSlot.d.push(userBookings[key].timeSlot);
+                                break;
+                            case 5:
+                                this.bookedSlot.e.push(userBookings[key].timeSlot);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }, err => {
+            alert(err);
+            console.log('^^^^^^^^^^',err);
+        })
+
     }
 
-    onSelectSlot(key: 'string', day: number, time: string) {
+    onSelectSlot(date, day: 1 | 2 | 3 | 4 | 5, time: string, dayInLetter: 'c' | 'b' | 'c' | 'd' | 'e') {
+
+        const slotStart = time.split('-')[0];
+        if ((this.bookedSlot[dayInLetter].indexOf(time) > -1) || (moment().utc().valueOf() > moment(`${date} ${slotStart}`).utc().valueOf())) {
+            alert('This slot is not available!');
+            return;
+        }
         if (this.currentBooking) {
             alert('You have a pending booking. Please go to manage booking to cancel!');
             return;
         }
-        let bookedDate = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`;
+
         let bookingObj = {
-            bookedDate: bookedDate,
+            bookedDate: date,
             bookedDay: day,
             timeSlot: time
         };
@@ -221,6 +146,45 @@ export class CustomerBookingFormComponent implements OnInit {
         }, err => {
             alert(err);
         });
+    }
+
+    autoGenerateDate() {
+        let mon = new Date().getMonth();
+        let date = new Date().getDate();
+        let yr = new Date().getFullYear();
+        let day = new Date(yr, mon, date).getDay();
+        let startDate;
+        switch(day) {
+            case 0:
+                startDate = moment().add(1, 'days').format('YYYY-M-D');
+                break;
+            case 1:
+                startDate = moment().format('YYYY-M-D');
+                break;
+            case 2:
+                startDate = moment().subtract(1, 'days').format('YYYY-M-D');
+                break;
+            case 3:
+                startDate = moment().subtract(2, 'days').format('YYYY-M-D');
+                break;
+            case 4:
+                startDate = moment().subtract(3, 'days').format('YYYY-M-D');
+                break;
+            case 5:
+                startDate = moment().subtract(4, 'days').format('YYYY-M-D');
+                break;
+            case 6:
+                startDate = moment().add(2, 'days').format('YYYY-M-D');
+                break;
+            default:
+                break;
+
+        }
+        this.dateRange.push(`${startDate}`);
+        for (let i = 1; i < 5; i++) {
+            let temp = moment(startDate).add(i, 'days').format('YYYY-M-D');
+            this.dateRange.push(`${temp}`);
+        }
     }
 
     onLogout() {

@@ -10,6 +10,7 @@ import {RelevantInfoComponent} from "~/app/relevant-info/relevant-info.component
 import {ForgotPasswordComponent} from "~/app/password/forgot-password.component";
 import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer-booking-form.component";
 import {ManageBookingComponent} from "~/app/manage-booking/manage-booking.component";
+import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback.component";
 
 const routes: Routes = [
     { path: "managementLogin", component: ManagementLoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: "relevantInfo", component: RelevantInfoComponent},
     { path: "customerBookingForm", component: CustomerBookingFormComponent},
     { path: "manage-booking", component: ManageBookingComponent},
+    { path: "customerFeedback", component: CustomerFeedbackComponent},
     { path: "", redirectTo: "/login", pathMatch: "full" },
 ];
 

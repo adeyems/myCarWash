@@ -20,12 +20,17 @@ export class DataService {
         private authService: AuthService
     ) {}
 
-    getBookings() {
+    getBookings(queryParams?: number) {
         return this.authService.user.pipe(
             take(1),
             switchMap(currentUser => {
                 if (!currentUser || !currentUser.isAuth) {
                     return of(null);
+                }
+                if (queryParams) {
+                    return this.http.get<any>(
+                        `${DataService.Config.FIREBASE_URL}/bookings/${currentUser.id}.json?auth=${currentUser.token}&orderBy="$key"&limitToLast=${queryParams}`
+                    )
                 }
                 return this.http.get<any>(
                     `${DataService.Config.FIREBASE_URL}/bookings/${currentUser.id}.json?auth=${currentUser.token}`
@@ -82,6 +87,37 @@ export class DataService {
                 )
             })
         );
+    }
+
+    saveFeedback(bookingId: string, payload) {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+            currentUser => {
+                if (!currentUser || !currentUser.isAuth) {
+                    return of(null);
+                }
+                return this.http.post(
+                    `${DataService.Config.FIREBASE_URL}/feedbacks/${currentUser.id}/${bookingId}.json?auth=${currentUser.token}`,
+                    payload
+                )
+
+            }));
+    }
+
+    fetchUserFeedbacks() {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+            currentUser => {
+                if (!currentUser || !currentUser.isAuth) {
+                    return of(null);
+                }
+                return this.http.get(
+                    `${DataService.Config.FIREBASE_URL}/feedbacks/${currentUser.id}.json?auth=${currentUser.token}`
+                )
+
+            }));
     }
 
 

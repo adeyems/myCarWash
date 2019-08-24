@@ -73,7 +73,7 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     goToProvideFeedback() {
-
+        this.router.navigate(["customerFeedback"]);
     }
 
     goToProvideRating() {

@@ -71,3 +71,6 @@ Label {
     color: black;
     font-family: "Al Bayan";
 }
+.text-deep-bold {
+    font-weight: bold;
+}

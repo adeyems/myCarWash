@@ -70,8 +70,11 @@ export class CustomerBookingFormComponent implements OnInit {
 
         this.dataService.getBookings().subscribe(response => {
             if (response) {
-                this.currentBooking = response;
-                this.selectedSlot = response[Object.keys(response)[0]];
+                let lastBookingDate = response[Object.keys(response)[0]].bookedDate;
+                if (this.dateRange.indexOf(lastBookingDate) > -1) {
+                    this.currentBooking = response;
+                    this.selectedSlot = response[Object.keys(response)[0]];
+                }
             }
 
             }, error => {
@@ -110,7 +113,6 @@ export class CustomerBookingFormComponent implements OnInit {
             }
         }, err => {
             alert(err);
-            console.log('^^^^^^^^^^',err);
         })
 
     }
@@ -182,7 +184,7 @@ export class CustomerBookingFormComponent implements OnInit {
         }
         this.dateRange.push(`${startDate}`);
         for (let i = 1; i < 5; i++) {
-            let temp = moment(startDate).add(i, 'days').format('YYYY-M-D');
+            let temp = moment(startDate, ["YYYY-M-D"]).add(i, 'days').format('YYYY-M-D');
             this.dateRange.push(`${temp}`);
         }
     }

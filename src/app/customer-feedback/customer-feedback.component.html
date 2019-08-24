@@ -1,0 +1,62 @@
+<ActionBar class="action-bar">
+  <GridLayout rows="*" columns="2*,5*,*">
+    <Image
+      src="res://icon"
+      class="page-icon"
+      row="0"
+      verticalAlignment="center"
+      col="0"
+      stretch="aspectFit"
+    ></Image>
+    <Image
+      src="res://account"
+      class="account-icon"
+      row="0"
+      verticalAlignment="center"
+      col="2"
+      stretch="aspectFill"
+      (tap)="onLogout()"
+    ></Image>
+    <Label
+      class="text-center action-bar-title"
+      row="0"
+      col="1"
+      verticalAlignment="center"
+      textWrap="true"
+      text="Feedback"
+    ></Label>
+  </GridLayout>
+</ActionBar>
+<ScrollView>
+  <StackLayout
+    paddingLeft="20"
+    paddingRight="20"
+    marginTop="20"
+    marginBottom="20"
+  >
+    <StackLayout *ngIf="!recentFeedback || (recentBooking && !recentFeedback)">
+      <Label
+        text="Feedback"
+        textWrap="true"
+        class="text-deep-bold"
+        fontSize="13"
+      ></Label>
+      <TextView
+        class="input"
+        [(ngModel)]="feedbackModel.feedback"
+        returnKeyType="done"
+      ></TextView>
+      <StackLayout marginTop="20" marginBottom="20">
+        <Button
+          class="btn btn-success"
+          text="Submit"
+          (tap)="submitFeedback()"
+        ></Button>
+      </StackLayout>
+    </StackLayout>
+    <FlexboxLayout alignItems="center">
+      <Label text="No booking found!" *ngIf="!recentBooking"></Label>
+      <Label text="You have already given feedback on your last booking!" *ngIf="recentFeedback"></Label>
+    </FlexboxLayout>
+  </StackLayout>
+</ScrollView>

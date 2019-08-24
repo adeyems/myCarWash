@@ -58,7 +58,7 @@
 .th-item.odd.is-selected,
 .th-item.even.is-selected {
     color: white;
-    background-color: red;
+    background-color: green;
 }
 .th-item.odd.is-booked,
 .th-item.even.is-booked {

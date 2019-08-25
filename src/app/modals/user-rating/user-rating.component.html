@@ -1,0 +1,56 @@
+<ScrollView height="100%">
+  <FlexboxLayout
+    flexDirection="column"
+    justifyContent="center";
+    alignItems="center"
+    marginTop="20"
+    marginBottom="20"
+    paddingLeft="20"
+    paddingRight="20"
+  >
+    <FlexboxLayout justifyContent="center" alignItems="center">
+      <Label
+        text="&#xf005;"
+        class="fa"
+        fontSize="30"
+        (tap)="onSelectRating(1)"
+        [class.is-selected]="rating > 0"
+      ></Label>
+      <Label
+        text="&#xf005;"
+        class="fa"
+        fontSize="30"
+        (tap)="onSelectRating(2)"
+        [class.is-selected]="rating > 1"
+      ></Label>
+      <Label
+        text="&#xf005;"
+        class="fa"
+        fontSize="30"
+        (tap)="onSelectRating(3)"
+        [class.is-selected]="rating > 2"
+      ></Label>
+      <Label
+        text="&#xf005;"
+        class="fa"
+        fontSize="30"
+        (tap)="onSelectRating(4)"
+        [class.is-selected]="rating > 3"
+      ></Label>
+      <Label
+        text="&#xf005;"
+        class="fa"
+        fontSize="30"
+        (tap)="onSelectRating(5)"
+        [class.is-selected]="rating > 4"
+      ></Label>
+    </FlexboxLayout>
+    <StackLayout marginTop="20" marginBottom="20">
+      <Button
+        class="btn btn-success"
+        text="Submit"
+        (tap)="submitRating()"
+      ></Button>
+    </StackLayout>
+  </FlexboxLayout>
+</ScrollView>

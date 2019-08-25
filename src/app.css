@@ -60,10 +60,10 @@ Label {
 .btn-success {
     color: #F5F5F5;
     background-color: rgb(20, 150, 31);
-    width: 500px;
-    height: 200px;
+    /* width: 500px;
+    height: 200px; */
     padding: 10px 31px 10px 31px;
-    border-width: 3px;
+    /* border-width: 3px; */
 }
 
 .title {

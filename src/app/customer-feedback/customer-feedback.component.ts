@@ -50,8 +50,7 @@ export class CustomerFeedbackComponent implements OnInit {
     getUserFeedbacks() {
         this.dataService.fetchUserFeedbacks().subscribe(res => {
             this.recentFeedback = res[this.recentBooking];
-            console.log(this.recentFeedback);
-        })
+        });
     }
 
     submitFeedback() {

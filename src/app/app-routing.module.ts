@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: "customerBookingForm", component: CustomerBookingFormComponent},
     { path: "manage-booking", component: ManageBookingComponent},
     { path: "customerFeedback", component: CustomerFeedbackComponent},
-    { path: "", redirectTo: "/login", pathMatch: "full" },
+    { path: "", redirectTo: "/customerHome", pathMatch: "full" },
 ];
 
 @NgModule({

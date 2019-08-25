@@ -83,5 +83,4 @@ export class CustomerHomeScreenComponent implements OnInit {
     onLogout() {
         this.authService.logout();
     }
-
 }

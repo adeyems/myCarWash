@@ -42,3 +42,12 @@
     font-size: 10%;
     font-family: "Arial Black";
 }
+
+.browse {
+    font-family: "FontAwesome", serif, sans-serif;
+    font-size: 20%;
+}
+
+.products {
+    font-size: 15%;
+}

@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
-import {RouterExtensions} from "nativescript-angular";
-import {of} from "rxjs";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TextField} from "tns-core-modules/ui/text-field";
+import {Component, OnInit, ViewContainerRef} from "@angular/core";
+import {RouterExtensions, ModalDialogOptions, ModalDialogService} from "nativescript-angular";
 import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
+import { DataService } from "../services/data.service";
+import { UserRating } from "../modals/user-rating/user-rating.component";
+import * as moment from 'moment';
 
 @Component({
     selector: "Home",
@@ -13,19 +13,19 @@ import {ActivatedRoute} from "@angular/router";
     styleUrls: ["./customer-home-screen.component.css"]
 })
 export class CustomerHomeScreenComponent implements OnInit {
-    form: FormGroup;
-    emailControlIsValid = true;
-    passwordControlIsValid = true;
-    isLoading = false;
-    @ViewChild("passwordEl", {static: false}) passwordEl: ElementRef<TextField>;
-    @ViewChild("emailEl", {static: false}) emailEl: ElementRef<TextField>;
     pageTitle: string;
     public currentUser: string;
+    recentBooking: string;
+    recentRating;
 
     constructor(
         private router: RouterExtensions,
         private authService: AuthService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private vcRef: ViewContainerRef,
+        protected dataService: DataService,
+        protected modalDialog: ModalDialogService
+
     ) {
         this.activatedRoute.queryParams.subscribe( params => {
             this.currentUser = params["user"];
@@ -34,30 +34,8 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.form = new FormGroup({
-            email: new FormControl(null, {
-                updateOn: 'blur',
-                validators: [Validators.required, Validators.email]
-            }),
-            password: new FormControl(null, {
-                updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(6)]
-            })
-        });
-
-        this.form.get('email').statusChanges.subscribe(status => {
-            this.emailControlIsValid = status === 'VALID';
-        });
-
-        this.form.get('password').statusChanges.subscribe(status => {
-            this.passwordControlIsValid = status === 'VALID';
-        });
-    }
-
-    onDone() {
-        this.emailEl.nativeElement.focus();
-        this.passwordEl.nativeElement.focus();
-        this.passwordEl.nativeElement.dismissSoftInput();
+        this.getUserRecentBooking();
+        this.getUserRatings();
     }
 
     goToBrowseRelevantInfo() {
@@ -77,7 +55,48 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     goToProvideRating() {
+        console.log(this.recentBooking);
+        console.log(this.recentRating);
+        if (!this.recentBooking && !this.recentRating) {
+            alert(`No booking to rate!`);
+            return;
+        }
+        if (this.recentRating) {
+            alert('Your last booking has been rated!');
+            return;
+        }
+        const options: ModalDialogOptions = {
+            fullscreen: true,
+            viewContainerRef: this.vcRef
+        }
+        this.modalDialog.showModal(UserRating, options).then(response => {
+            if (response) {
+                let ratingModel = {
+                    rating: response,
+                    date: moment().format("YYYY-M-D")
+                };
+                this.dataService.saveUserRating(this.recentBooking, ratingModel).subscribe(res => {
+                    alert('Thank you for rating!');
+                    this.getUserRatings();
+                }, err => {
+                    alert(err);
+                });
+            }
+        });
+    }
 
+    getUserRecentBooking() {
+        this.dataService.getBookings(1).subscribe(res => {
+            this.recentBooking = Object.keys(res)[0];
+        }, err => {
+            alert(err);
+        })
+    }
+
+    getUserRatings() {
+        this.dataService.fetchUserRatings().subscribe(res => {
+            this.recentRating = res[this.recentBooking];
+        });
     }
 
     onLogout() {

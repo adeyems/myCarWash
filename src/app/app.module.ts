@@ -17,6 +17,7 @@ import {ForgotPasswordComponent} from "~/app/password/forgot-password.component"
 import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer-booking-form.component";
 import {ManageBookingComponent} from "~/app/manage-booking/manage-booking.component";
 import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback.component";
+import { UserRating } from "./modals/user-rating/user-rating.component";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -36,7 +37,8 @@ import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback
         NativeScriptHttpClientModule,
     ],
     entryComponents: [
-        AppComponent
+        AppComponent,
+        UserRating
     ],
     declarations: [
         AppComponent,
@@ -50,7 +52,8 @@ import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback
         ForgotPasswordComponent,
         CustomerBookingFormComponent,
         ManageBookingComponent,
-        CustomerFeedbackComponent
+        CustomerFeedbackComponent,
+        UserRating
     ],
     providers: [],
     schemas: [

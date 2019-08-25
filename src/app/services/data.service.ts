@@ -120,5 +120,34 @@ export class DataService {
             }));
     }
 
+    saveUserRating(bookingId: string, payload) {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+            currentUser => {
+                if (!currentUser || !currentUser.isAuth) {
+                    return of(null);
+                }
+                return this.http.post(
+                    `${DataService.Config.FIREBASE_URL}/ratings/${currentUser.id}/${bookingId}.json?auth=${currentUser.token}`,
+                    payload
+                )
+
+            }));
+    }
+
+    fetchUserRatings() {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+            currentUser => {
+                if (!currentUser || !currentUser.isAuth) {
+                    return of(null);
+                }
+                return this.http.get(
+                    `${DataService.Config.FIREBASE_URL}/ratings/${currentUser.id}.json?auth=${currentUser.token}`
+                )
+            }));
+    }
 
 }

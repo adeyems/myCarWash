@@ -18,7 +18,7 @@ export class CustomerFeedbackComponent implements OnInit {
     feedbackModel = {
         feedback: "",
         date: ""
-    }
+    };
     recentBooking: string;
     recentFeedback;
 

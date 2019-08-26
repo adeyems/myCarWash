@@ -18,6 +18,7 @@ import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer
 import {ManageBookingComponent} from "~/app/manage-booking/manage-booking.component";
 import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback.component";
 import { UserRating } from "./modals/user-rating/user-rating.component";
+import {ManagementHomeScreenComponent} from "~/app/management-home-screen/management-home-screen.component";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -53,7 +54,8 @@ import { UserRating } from "./modals/user-rating/user-rating.component";
         CustomerBookingFormComponent,
         ManageBookingComponent,
         CustomerFeedbackComponent,
-        UserRating
+        UserRating,
+        ManagementHomeScreenComponent
     ],
     providers: [],
     schemas: [

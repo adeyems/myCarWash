@@ -1,0 +1,20 @@
+<ActionBar class="action-bar">
+    <GridLayout rows="*" columns="2*,5*,*">
+        <Image src="res://icon" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>
+        <Image src="res://account" class="account-icon" row="0" verticalAlignment="center" col="2" stretch="aspectFill" (tap)="onLogout()"></Image>
+        <Label class="text-center action-bar-title" row="0" col="1" verticalAlignment="center" textWrap="true" text="Management Home Screen"></Label>
+    </GridLayout>
+</ActionBar>
+<ScrollView>
+    <StackLayout paddingTop="50">
+        <GridLayout paddingBottom="30" rows="auto" columns="*,*">
+            <Button col="0" class="btn btn-main" text="View Bookings"></Button>
+            <Button class="btn btn-main" col="1"  text="Upload Products"></Button>
+        </GridLayout>
+        <GridLayout paddingBottom="30" rows="auto" columns="*,*,*">
+            <Button col="1" class="btn btn-main" text="Respond to Feedback"></Button>
+        </GridLayout>
+    </StackLayout>
+</ScrollView>
+
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular/modal-dialog';
+import {AuthService} from "~/app/services/auth.service";
 
 @Component({
   selector: 'ns-user-rating',
@@ -10,6 +11,7 @@ export class UserRating implements OnInit {
     rating: number = 0;
     constructor(
         private modalParams: ModalDialogParams,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
@@ -26,4 +28,7 @@ export class UserRating implements OnInit {
         this.modalParams.closeCallback(closeModalValue);
     }
 
+    onLogout() {
+        this.authService.logout();
+    }
 }

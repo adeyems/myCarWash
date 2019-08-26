@@ -11,6 +11,7 @@ import {ForgotPasswordComponent} from "~/app/password/forgot-password.component"
 import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer-booking-form.component";
 import {ManageBookingComponent} from "~/app/manage-booking/manage-booking.component";
 import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback.component";
+import {ManagementHomeScreenComponent} from "~/app/management-home-screen/management-home-screen.component";
 
 const routes: Routes = [
     { path: "managementLogin", component: ManagementLoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: "customerSignup", component: SignupComponent },
     { path: "customerHome", component:  CustomerHomeScreenComponent},
+    { path: "managementHome", component:  ManagementHomeScreenComponent},
     { path: "relevantInfo", component: RelevantInfoComponent},
     { path: "customerBookingForm", component: CustomerBookingFormComponent},
     { path: "manage-booking", component: ManageBookingComponent},

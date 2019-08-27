@@ -31,7 +31,7 @@ const routes: Routes = [
     { path: "bookings", component: BookingsComponent},
     { path: "feedbacks", component: FeedbacksComponent},
     { path: "upload", component: UploadProductsComponent},
-    { path: "", redirectTo: "/managementHome", pathMatch: "full" },
+    { path: "", redirectTo: "/login", pathMatch: "full" },
 ];
 
 @NgModule({

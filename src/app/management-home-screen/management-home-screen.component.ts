@@ -43,4 +43,8 @@ export class ManagementHomeScreenComponent implements OnInit {
     onLogout() {
         this.authService.logout();
     }
+
+    goToUploadProducts() {
+        this.router.navigate(["upload"])
+    }
 }

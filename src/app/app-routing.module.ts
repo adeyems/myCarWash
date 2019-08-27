@@ -14,6 +14,7 @@ import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback
 import {ManagementHomeScreenComponent} from "~/app/management-home-screen/management-home-screen.component";
 import { BookingsComponent } from "./bookings/bookings.component";
 import { FeedbacksComponent } from "./feedbacks/feedbacks.component";
+import {UploadProductsComponent} from "~/app/upload-products/upload-products.component";
 
 const routes: Routes = [
     { path: "managementLogin", component: ManagementLoginComponent },
@@ -29,7 +30,8 @@ const routes: Routes = [
     { path: "customerFeedback", component: CustomerFeedbackComponent},
     { path: "bookings", component: BookingsComponent},
     { path: "feedbacks", component: FeedbacksComponent},
-    { path: "", redirectTo: "/login", pathMatch: "full" },
+    { path: "upload", component: UploadProductsComponent},
+    { path: "", redirectTo: "/managementHome", pathMatch: "full" },
 ];
 
 @NgModule({

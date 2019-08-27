@@ -22,6 +22,7 @@ import {ManagementHomeScreenComponent} from "~/app/management-home-screen/manage
 import { BookingsComponent } from "./bookings/bookings.component";
 import { FeedbacksComponent } from "./feedbacks/feedbacks.component";
 import { FeedbackReply } from "./modals/feedback-reply/feedback-reply.component";
+import {UploadProductsComponent} from "~/app/upload-products/upload-products.component";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -59,6 +60,7 @@ import { FeedbackReply } from "./modals/feedback-reply/feedback-reply.component"
         ManageBookingComponent,
         CustomerFeedbackComponent,
         UserRating,
+        UploadProductsComponent,
         ManagementHomeScreenComponent,
         BookingsComponent,
         FeedbacksComponent,

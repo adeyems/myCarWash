@@ -20,6 +20,12 @@ export class DataService {
         private authService: AuthService
     ) {}
 
+    fetchCustomers() {
+        return this.http.get<any>(
+            `${DataService.Config.FIREBASE_URL}/customers.json`
+        )
+    }
+
     getBookings(queryParams?: number) {
         return this.authService.user.pipe(
             take(1),
@@ -148,6 +154,27 @@ export class DataService {
                     `${DataService.Config.FIREBASE_URL}/ratings/${currentUser.id}.json?auth=${currentUser.token}`
                 )
             }));
+    }
+
+    fetchFeedbacks() {
+        return this.http.get<any>(
+            `${DataService.Config.FIREBASE_URL}/feedbacks.json`
+        )
+    }
+
+    saveFeedbackReply(payload, customerId, bookingId, feedbackId) {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+            currentUser => {
+                if (!currentUser || !currentUser.isAuth) {
+                    return of(null);
+                }
+                payload['adminId'] = currentUser.id;
+                return this.http.patch(`${DataService.Config.FIREBASE_URL}/feedbacks/${customerId}/${bookingId}/${feedbackId}/response.json?auth=${currentUser.token}`,
+                payload);
+            })
+        );
     }
 
 }

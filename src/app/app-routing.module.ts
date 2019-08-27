@@ -12,6 +12,8 @@ import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer
 import {ManageBookingComponent} from "~/app/manage-booking/manage-booking.component";
 import { CustomerFeedbackComponent } from "./customer-feedback/customer-feedback.component";
 import {ManagementHomeScreenComponent} from "~/app/management-home-screen/management-home-screen.component";
+import { BookingsComponent } from "./bookings/bookings.component";
+import { FeedbacksComponent } from "./feedbacks/feedbacks.component";
 
 const routes: Routes = [
     { path: "managementLogin", component: ManagementLoginComponent },
@@ -25,6 +27,8 @@ const routes: Routes = [
     { path: "customerBookingForm", component: CustomerBookingFormComponent},
     { path: "manage-booking", component: ManageBookingComponent},
     { path: "customerFeedback", component: CustomerFeedbackComponent},
+    { path: "bookings", component: BookingsComponent},
+    { path: "feedbacks", component: FeedbacksComponent},
     { path: "", redirectTo: "/login", pathMatch: "full" },
 ];
 

@@ -1,0 +1,92 @@
+<ActionBar class="action-bar">
+  <GridLayout rows="*" columns="2*,5*,*">
+    <Image
+      src="res://icon"
+      class="page-icon"
+      row="0"
+      verticalAlignment="center"
+      col="0"
+      stretch="aspectFit"
+    ></Image>
+    <Image
+      src="res://account"
+      class="account-icon"
+      row="0"
+      verticalAlignment="center"
+      col="2"
+      stretch="aspectFill"
+      (tap)="onLogout()"
+    ></Image>
+    <Label
+      class="text-center action-bar-title"
+      row="0"
+      col="1"
+      verticalAlignment="center"
+      textWrap="true"
+      text="Customer Feedbacks"
+    ></Label>
+  </GridLayout>
+</ActionBar>
+<ScrollView>
+  <StackLayout marginTop="10">
+    <FlexboxLayout
+      width="100%"
+      height="100%"
+      justifyContent="center"
+      alignItems="center"
+      *ngIf="isLoading"
+    >
+      <ActivityIndicator busy="true"></ActivityIndicator>
+    </FlexboxLayout>
+    <StackLayout *ngIf="!isLoading">
+      <StackLayout *ngIf="feedbackDetails.length > 0">
+        <StackLayout class="feedbacks-box" *ngFor="let fbk of feedbackDetails">
+          <StackLayout class="fbk-user-info">
+            <Label [text]="fbk.customerInfo.customerName" textAlignment="center"></Label>
+            <Label [text]="fbk.customerInfo.customerEmail" textAlignment="center"></Label>
+            <Label [text]="fbk.customerInfo.customerPhone" textAlignment="center"></Label>
+          </StackLayout>
+          <FlexboxLayout class="fbk-row">
+            <Label text="Booking ID" class="fbk-col2" textWrap="true"></Label>
+            <Label text="Feedback" class="fbk-col1" textWrap="true"></Label>
+            <Label text="Date" class="fbk-col2" textWrap="true"></Label>
+            <Label text="Response" class="fbk-col1" textWrap="true"></Label>
+          </FlexboxLayout>
+          <FlexboxLayout
+            class="fbk-row"
+            *ngFor="let fbkInfo of fbk.feedbackInfo; let i = index"
+          >
+            <Label
+              [text]="fbkInfo.bookingId"
+              class="fbk-col2"
+              textWrap="true"
+            ></Label>
+            <Label
+              [text]="fbkInfo.feedback"
+              class="fbk-col1"
+              textWrap="true"
+            ></Label>
+            <Label
+              [text]="fbkInfo.fbDate"
+              class="fbk-col2"
+              textWrap="true"
+            ></Label>
+            <Stacklayout class="fbk-col1">
+              <Label
+                [text]="fbkInfo.response"
+                textWrap="true"
+                *ngIf="fbkInfo.response"
+              ></Label>
+              <Button
+                *ngIf="!fbkInfo.response"
+                text="reply"
+                class="fbk-reply-btn"
+                (tap)="onReplyFeedback(fbk.customerInfo, fbk.feedbackInfo[i])"
+              ></Button>
+            </Stacklayout>
+          </FlexboxLayout>
+        </StackLayout>
+      </StackLayout>
+    </StackLayout>
+  </StackLayout>
+</ScrollView>

@@ -1,0 +1,10 @@
+.reply-btn {
+    background-color: green;
+    border-radius: 3;
+    border-width: 1;
+    border-color: green;
+    padding: 10 8;
+}
+.fbk-response-tv {
+    border-bottom-color: #ddd;
+}

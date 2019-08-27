@@ -32,7 +32,7 @@ interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     private _user = new BehaviorSubject<UserModel>(null);
-    private tokenExpirationTimer: number;
+    private tokenExpirationTimer;
     private currentUser = "customer";
 
     constructor(
@@ -177,7 +177,7 @@ export class AuthService {
         //const newPatient = new CustomerModel("wqdewfretgryhtuyrtgerfedasw", "name", "surname", "phone", "email", new Date());
         const newCustomer = new CustomerModel(resData.localId, name, surname, phone, email, new Date());
         return this.http.post(
-            `${AuthService.Config.FIREBASE_URL}/customers/${resData.localId}.json`, newCustomer
+            `${AuthService.Config.FIREBASE_URL}/managements/${resData.localId}.json`, newCustomer
         ).pipe(
             catchError(errorRes => {
                 console.log(errorRes);

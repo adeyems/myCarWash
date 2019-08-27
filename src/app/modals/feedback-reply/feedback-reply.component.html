@@ -1,0 +1,27 @@
+<ScrollView>
+  <StackLayout marginTop="20" paddingLeft="20" paddingRight="20">
+    <StackLayout marginBottom="10">
+      <Label
+        [text]="customerInfo.customerName+' '+customerInfo.customerSurname"
+        textWrap="true"
+        textAlignment="center"
+        fontSize="17"
+        fontWeight="bold"
+      ></Label>
+      <Label
+        [text]="feedbackInfo.bookingId"
+        textWrap="true"
+        textAlignment="center"
+        fontSize="15"
+      ></Label>
+    </StackLayout>
+    <TextView
+      [(ngModel)]="feedbackResponse"
+      hint="Enter Reply Text"
+      class="fbk-response-tv"
+    ></TextView>
+    <FlexboxLayout justifyContent="center">
+      <Button text="Reply" class="reply-btn" (tap)="onReply()"></Button>
+    </FlexboxLayout>
+  </StackLayout>
+</ScrollView>

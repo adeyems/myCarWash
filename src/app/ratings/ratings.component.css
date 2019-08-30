@@ -26,24 +26,10 @@
     border-width: 1;
     border-color: #ddd;
 }
-.fbk-row {
-    width: 100%;
-    align-items: center;
+.rating-item {
+    flex-direction: column;
     padding: 10 5;
-    border-top-width: 1;
-    border-top-color: #ddd;
-    border-bottom-width: 1;
-    border-bottom-color: #ddd;
-}
-.fbk-col1 {
-    width: 30%;
-    padding: 0 1;
-}
-.fbk-col2 {
-    width: 20%;
-    padding: 0 1;
-}
-.fbk-reply-btn {
-    background-color: goldenrod;
-    padding: 10 8;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }

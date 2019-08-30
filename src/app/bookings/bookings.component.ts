@@ -68,8 +68,8 @@ export class BookingsComponent implements OnInit {
         if (this.loadCounter == 2) {
             for (let bookingsKey in this.bookings) {
                 for (let key in this.bookings[bookingsKey]) {
-                    let bookingDate = moment(`${this.bookings[bookingsKey][key].bookedDate}`, ["YYYY-M-D"]).utc().valueOf();
-                    if (bookingDate >= this.currentTime) {
+                    // let bookingDate = moment(`${this.bookings[bookingsKey][key].bookedDate}`, ["YYYY-M-D"]).utc().valueOf();
+                    // if (bookingDate >= this.currentTime) {
                         this.bookingsDetails.push({
                             id: key,
                             bookedDate: moment(this.bookings[bookingsKey][key].bookedDate, ["YYYY-M-D"]).format("dddd, MMMM Do YYYY"),
@@ -80,7 +80,7 @@ export class BookingsComponent implements OnInit {
                             customerEmail: this.customers[bookingsKey][Object.keys(this.customers[bookingsKey])[0]].email,
                             customerPhone: this.customers[bookingsKey][Object.keys(this.customers[bookingsKey])[0]].phone,
                         })
-                    }
+                    // }
                 }
             }
         }

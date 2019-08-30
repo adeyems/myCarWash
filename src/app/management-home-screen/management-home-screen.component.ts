@@ -39,6 +39,9 @@ export class ManagementHomeScreenComponent implements OnInit {
     goToFeedbacks() {
         this.router.navigate(["feedbacks"]);
     }
+    goToRatings() {
+        this.router.navigate(["ratings"]);
+    }
 
     onLogout() {
         this.authService.logout();

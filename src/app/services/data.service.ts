@@ -177,4 +177,10 @@ export class DataService {
         );
     }
 
+    fetchRatings() {
+        return this.http.get<any>(
+            `${DataService.Config.FIREBASE_URL}/ratings.json`
+        )
+    }
+
 }

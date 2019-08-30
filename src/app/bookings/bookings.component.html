@@ -40,9 +40,9 @@
     </FlexboxLayout>
     <StackLayout *ngIf="!isLoading">
       <FlexboxLayout width="100%" class="booking-table-row bg-ghost">
-        <Label text="Customer Info." textWrap="true" class="b-t-col"></Label>
-        <Label text="Booking ID/Booked Date" textWrap="true" class="b-t-col"></Label>
-        <Label text="Time Slot" textWrap="true" class="b-t-col2"></Label>
+        <Label text="Customer Info." textWrap="true" class="b-t-col text-deep-bold"></Label>
+        <Label text="Booking ID/Booked Date" textWrap="true" class="b-t-col text-deep-bold"></Label>
+        <Label text="Time Slot" textWrap="true" class="b-t-col2 text-deep-bold"></Label>
       </FlexboxLayout>
       <FlexboxLayout
         width="100%"
@@ -61,9 +61,9 @@
           </StackLayout>
           <StackLayout class="b-t-col">
             <Label [text]="bkd.id" textWrap="true"></Label>
-            <Label [text]="bkd.bookedDate" textWrap="true"></Label>
+            <Label [text]="bkd.bookedDate" textWrap="true" class="text-deep-bold"></Label>
           </StackLayout>
-          <Label [text]="bkd.timeSlot" textWrap="true" class="b-t-col2"></Label>
+          <Label [text]="bkd.timeSlot" textWrap="true" class="b-t-col2 text-deep-bold"></Label>
         </FlexboxLayout>
       </StackLayout>
     </StackLayout>

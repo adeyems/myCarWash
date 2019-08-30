@@ -16,7 +16,7 @@
                     <Label text="Mon" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots; let i = index" [text]="ts.timeSlot" class="th-item"
                         [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 1"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 1) || bookingDates.a.indexOf(ts.timeSlot) > -1"
                         [class.is-booked]="bookedSlot.a.indexOf(ts.timeSlot) > -1"
                         (tap)="onSelectSlot(dateRange[0], 1, ts.timeSlot, 'a')"></Label>
                 </FlexboxLayout>
@@ -24,7 +24,7 @@
                     <Label text="Tue" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
                         [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 2"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 2) || bookingDates.b.indexOf(ts.timeSlot) > -1"
                         [class.is-booked]="bookedSlot.b.indexOf(ts.timeSlot) > -1"
                         (tap)="onSelectSlot(dateRange[1], 2, ts.timeSlot, 'b')"></Label>
                 </FlexboxLayout>
@@ -32,7 +32,7 @@
                     <Label text="Wed" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
                         [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 3"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 3) || bookingDates.c.indexOf(ts.timeSlot) > -1"
                         [class.is-booked]="bookedSlot.c.indexOf(ts.timeSlot) > -1"
                         (tap)="onSelectSlot(dateRange[2], 3, ts.timeSlot, 'c')"></Label>
                 </FlexboxLayout>
@@ -40,7 +40,7 @@
                     <Label text="Thur" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
                         [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 4"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 4) || bookingDates.d.indexOf(ts.timeSlot) > -1"
                         [class.is-booked]="bookedSlot.d.indexOf(ts.timeSlot) > -1"
                         (tap)="onSelectSlot(dateRange[3], 4, ts.timeSlot, 'd')"></Label>
                 </FlexboxLayout>
@@ -48,13 +48,13 @@
                     <Label text="Fri" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
                         [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 5"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 5) || bookingDates.e.indexOf(ts.timeSlot) > -1"
                         [class.is-booked]="bookedSlot.e.indexOf(ts.timeSlot) > -1"
                         (tap)="onSelectSlot(dateRange[4], 5, ts.timeSlot, 'e')"></Label>
                 </FlexboxLayout>
             </FlexboxLayout>
         </StackLayout>
-        <StackLayout *ngIf="!currentBooking">
+        <StackLayout>
             <Button class="btn btn-success" text="Confirm" (tap)="onConfirmSlot()"></Button>
         </StackLayout>
     </StackLayout>

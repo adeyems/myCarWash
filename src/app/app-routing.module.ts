@@ -15,6 +15,7 @@ import {ManagementHomeScreenComponent} from "~/app/management-home-screen/manage
 import { BookingsComponent } from "./bookings/bookings.component";
 import { FeedbacksComponent } from "./feedbacks/feedbacks.component";
 import {UploadProductsComponent} from "~/app/upload-products/upload-products.component";
+import {RatingsComponent} from "~/app/ratings/ratings.component";
 
 const routes: Routes = [
     { path: "managementLogin", component: ManagementLoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
     { path: "bookings", component: BookingsComponent},
     { path: "feedbacks", component: FeedbacksComponent},
     { path: "upload", component: UploadProductsComponent},
+    { path: "ratings", component: RatingsComponent},
     { path: "", redirectTo: "/login", pathMatch: "full" },
 ];
 

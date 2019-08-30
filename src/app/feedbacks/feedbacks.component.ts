@@ -91,10 +91,9 @@ export class FeedbacksComponent implements OnInit {
                         customerEmail: this.customers[feedbackKey][Object.keys(this.customers[feedbackKey])[0]].email,
                         customerPhone: this.customers[feedbackKey][Object.keys(this.customers[feedbackKey])[0]].phone,
                     }
-                })
+                });
             }
         }
-        console.log('>>>>>>>>>>',this.feedbackDetails);
     }
 
     onReplyFeedback(customerInfo, feedbackInfo) {

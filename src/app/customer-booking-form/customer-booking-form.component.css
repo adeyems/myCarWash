@@ -57,13 +57,17 @@
 }
 .th-item.odd.is-selected,
 .th-item.even.is-selected {
-    color: white;
-    background-color: green;
+    /*color: white;*/
+    border-color: green;
+    border-width: 1;
+    /*background-color: green;*/
 }
 .th-item.odd.is-booked,
 .th-item.even.is-booked {
-    color: white;
-    background-color: red;
+    /*color: white;*/
+    /*background-color: red;*/
+    border-color: red;
+    border-width: 1;
 }
 .th-item.odd {
     background-color: white;

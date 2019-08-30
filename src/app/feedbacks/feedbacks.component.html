@@ -42,7 +42,8 @@
       <StackLayout *ngIf="feedbackDetails.length > 0">
         <StackLayout class="feedbacks-box" *ngFor="let fbk of feedbackDetails">
           <StackLayout class="fbk-user-info">
-            <Label [text]="fbk.customerInfo.customerName" textAlignment="center"></Label>
+            <Label [text]="fbk.customerInfo.customerName+' '+fbk.customerInfo.customerSurname" textAlignment="center"
+              class="text-deep-bold" fontSize="17"></Label>
             <Label [text]="fbk.customerInfo.customerEmail" textAlignment="center"></Label>
             <Label [text]="fbk.customerInfo.customerPhone" textAlignment="center"></Label>
           </StackLayout>

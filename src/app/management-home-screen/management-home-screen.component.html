@@ -38,12 +38,18 @@
       ></Button>
       <Button class="btn btn-main" col="1" (tap)="goToUploadProducts()" text="Upload Products"></Button>
     </GridLayout>
-    <GridLayout paddingBottom="30" rows="auto" columns="*,*,*">
+    <GridLayout paddingBottom="30" rows="auto" columns="*,*">
       <Button
-        col="1"
+        col="0"
         class="btn btn-main"
         text="View Feedbacks"
         (tap)="goToFeedbacks()"
+      ></Button>
+      <Button
+        col="1"
+        class="btn btn-main"
+        text="View Ratings"
+        (tap)="goToRatings()"
       ></Button>
     </GridLayout>
   </StackLayout>

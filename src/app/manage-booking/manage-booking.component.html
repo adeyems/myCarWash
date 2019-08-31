@@ -15,37 +15,42 @@
                 <FlexboxLayout class="th-box" flexDirection="column">
                     <Label text="Mon" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots; let i = index" [text]="ts.timeSlot" class="th-item"
-                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 1"></Label>
+                           (tap)="deleteBooking('a', ts.timeSlot, currentBooking.a.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 1) || (currentBooking.a.bookedDate == dateRange[0] && currentBooking.a.timeSlot == ts.timeSlot)"></Label>
                 </FlexboxLayout>
                 <FlexboxLayout class="th-box" flexDirection="column">
                     <Label text="Tue" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
-                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 2"></Label>
+                           (tap)="deleteBooking('b', ts.timeSlot, currentBooking.b.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 2) || (currentBooking.b.bookedDate == dateRange[1] && currentBooking.b.timeSlot == ts.timeSlot)"></Label>
                 </FlexboxLayout>
                 <FlexboxLayout class="th-box" flexDirection="column">
                     <Label text="Wed" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
-                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 3"></Label>
+                           (tap)="deleteBooking('c', ts.timeSlot, currentBooking.c.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 3) || (currentBooking.c.bookedDate == dateRange[2] && currentBooking.c.timeSlot == ts.timeSlot)"></Label>
                 </FlexboxLayout>
                 <FlexboxLayout class="th-box" flexDirection="column">
                     <Label text="Thur" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
-                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 4"></Label>
+                           (tap)="deleteBooking('d', ts.timeSlot, currentBooking.d.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 4) || (currentBooking.d.bookedDate == dateRange[3] && currentBooking.d.timeSlot == ts.timeSlot)"></Label>
                 </FlexboxLayout>
                 <FlexboxLayout class="th-box" flexDirection="column">
                     <Label text="Fri" class="table-head"></Label>
                     <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
-                        [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
-                        [class.is-selected]="selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 5"></Label>
+                           (tap)="deleteBooking('e', ts.timeSlot, currentBooking.e.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                           [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 5) || (currentBooking.e.bookedDate == dateRange[4] && currentBooking.e.timeSlot == ts.timeSlot)"></Label>
                 </FlexboxLayout>
             </FlexboxLayout>
         </StackLayout>
         <StackLayout StackLayout *ngIf="currentBooking">
-            <Button class="btn btn-main" col="1" text="Cancel Booking" (tap)="onCancelSlot()"></Button>
+            <Button class="btn btn-main" col="1" text="Cancel All Booking" (tap)="onCancelSlot()"></Button>
         </StackLayout>
     </StackLayout>
 </ScrollView>

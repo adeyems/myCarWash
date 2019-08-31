@@ -5,9 +5,13 @@
     </GridLayout>
 </ActionBar>
 
-<StackLayout>
-    <GridLayout paddingBottom="30" paddingTop="60" rows="auto" columns="*,*">
-        <Button (tap)="goToCustomerLogin()" col="0" class="btn btn-main" text="Customer"></Button>
-        <Button class="btn btn-main" col="1" (tap)="goToManagementLogin()" text="Management"></Button>
-    </GridLayout>
-</StackLayout>
+<ScrollView>
+    <StackLayout>
+        <GridLayout paddingBottom="30" paddingTop="60" rows="auto" columns="*,*">
+            <Button (tap)="goToCustomerLogin()" col="0" class="btn btn-main" text="Customer"></Button>
+            <Button class="btn btn-main" col="1" (tap)="goToManagementLogin()" text="Management"></Button>
+        </GridLayout>
+    </StackLayout>
+</ScrollView>
+
+

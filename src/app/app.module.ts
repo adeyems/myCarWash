@@ -10,7 +10,6 @@ import {HomeComponent} from "~/app/home/home.component";
 import {CustomerLoginComponent} from "~/app/login/customer/customer-login.component";
 import {ManagementLoginComponent} from "~/app/login/management/management-login.component";
 import {SignupComponent} from "~/app/signup/signup.component";
-import {RelevantInfoComponent} from "~/app/relevant-info/relevant-info.component";
 import {CustomerHomeScreenComponent} from "~/app/customer-home-screen/customer-home-screen.component";
 import {NativeScriptFormsModule} from "nativescript-angular";
 import {ForgotPasswordComponent} from "~/app/password/forgot-password.component";
@@ -54,7 +53,6 @@ import {RatingsComponent} from "~/app/ratings/ratings.component";
         CustomerLoginComponent,
         ManagementLoginComponent,
         SignupComponent,
-        RelevantInfoComponent,
         CustomerHomeScreenComponent,
         ForgotPasswordComponent,
         CustomerBookingFormComponent,

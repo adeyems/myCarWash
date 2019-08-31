@@ -6,7 +6,6 @@ import {ManagementLoginComponent} from "~/app/login/management/management-login.
 import {CustomerLoginComponent} from "~/app/login/customer/customer-login.component";
 import {SignupComponent} from "~/app/signup/signup.component";
 import {CustomerHomeScreenComponent} from "~/app/customer-home-screen/customer-home-screen.component";
-import {RelevantInfoComponent} from "~/app/relevant-info/relevant-info.component";
 import {ForgotPasswordComponent} from "~/app/password/forgot-password.component";
 import {CustomerBookingFormComponent} from "~/app/customer-booking-form/customer-booking-form.component";
 import {ManageBookingComponent} from "~/app/manage-booking/manage-booking.component";
@@ -25,7 +24,6 @@ const routes: Routes = [
     { path: "customerSignup", component: SignupComponent },
     { path: "customerHome", component:  CustomerHomeScreenComponent},
     { path: "managementHome", component:  ManagementHomeScreenComponent},
-    { path: "relevantInfo", component: RelevantInfoComponent},
     { path: "customerBookingForm", component: CustomerBookingFormComponent},
     { path: "manage-booking", component: ManageBookingComponent},
     { path: "customerFeedback", component: CustomerFeedbackComponent},

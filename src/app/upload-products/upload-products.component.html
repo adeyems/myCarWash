@@ -34,7 +34,7 @@
     marginTop="20"
     marginBottom="20"
   >
-    <StackLayout *ngIf="!recentFeedback || (recentBooking && !recentFeedback)">
+    <StackLayout>
       <Label
         text="Title"
         textWrap="true"
@@ -43,7 +43,7 @@
       ></Label>
       <TextField
         class="input"
-        [(ngModel)]="feedbackModel.feedback"
+        [(ngModel)]="productModel.title"
         returnKeyType="done"
       ></TextField>
       <Label
@@ -54,22 +54,31 @@
       ></Label>
       <TextView
               class="input"
-              [(ngModel)]="feedbackModel.feedback"
+              [(ngModel)]="productModel.description"
               returnKeyType="done"
               [rowSpan]="30"
       ></TextView>
       <StackLayout marginTop="20" marginBottom="20">
         <Button
           class="btn btn-rounded-sm"
-          text="Upload Image"
+          text="Choose Image"
           [disabled]="true"
+          (tap)="onChooseFile()"
         ></Button>
       </StackLayout>
-      <StackLayout marginTop="20" marginBottom="20">
+      <FlexboxLayout class="item-box-image" *ngIf="filePath">
+        <Image [src]="filePath" stretch="none" decodeWidth="100" decodeHeight="100"></Image>
+      </FlexboxLayout>
+      <FlexboxLayout *ngIf="isUploading" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
+        <Label [text]="'uploading...'+uploadPercentage+'%'"></Label>
+        <ActivityIndicator busy="true"></ActivityIndicator>
+      </FlexboxLayout>
+      <StackLayout marginBottom="20">
         <Button
                 class="btn btn-success"
-                text="Upload"
+                text="Save"
                 [disabled]="true"
+                (tap)="onSave()"
         ></Button>
       </StackLayout>
     </StackLayout>

@@ -12,9 +12,14 @@
 android {
   defaultConfig {
     minSdkVersion 19
+    multiDexEnabled true
     generatedDensities = []
   }
   aaptOptions {
     additionalParameters "--no-version-vectors"
   }
+  dexOptions {
+    javaMaxHeapSize "4g"
+  }
 }
+

@@ -26,3 +26,11 @@
     border-width: 1;
     border-color: #ddd;
 }
+.item-box-image {
+    justify-content: center;
+    align-items: center;
+    height: 300;
+    border-bottom-width: 1px;
+    border-bottom-color: #ddd;
+}
+

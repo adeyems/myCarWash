@@ -4,6 +4,8 @@ import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import { DataService } from "../services/data.service";
 import * as moment from 'moment';
+import { openFilePicker } from 'nativescript-simple-filepicker';
+const firebase = require("nativescript-plugin-firebase");
 
 @Component({
     selector: "ns-customer-feedback",
@@ -15,12 +17,13 @@ export class UploadProductsComponent implements OnInit {
     isLoading = false;
     pageTitle: string;
     public currentUser: string;
-    feedbackModel = {
-        feedback: "",
-        date: ""
-    };
-    recentBooking: string;
-    recentFeedback;
+    productModel = {
+        title: "",
+        description: ""
+    }
+    filePath: string;
+    uploadPercentage: number = 0;
+    isUploading: boolean = false;
 
     constructor(
         private router: RouterExtensions,
@@ -35,32 +38,83 @@ export class UploadProductsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getUserRecentBooking();
-        this.getUserFeedbacks();
+        firebase.init({
+            // Optionally pass in properties for database, authentication and cloud messaging,
+            // see their respective docs.
+        }).then(
+            () => {
+                console.log("firebase.init done");
+            },
+            error => {
+                console.log(`firebase.init error: ${error}`);
+            }
+        );
     }
 
-    getUserRecentBooking() {
-        this.dataService.getBookings(1).subscribe(res => {
-            this.recentBooking = Object.keys(res)[0];
-        }, err => {
-            alert(err);
-        })
-    }
+    onChooseFile() {
+        openFilePicker({
 
-    getUserFeedbacks() {
-        this.dataService.fetchUserFeedbacks().subscribe(res => {
-            this.recentFeedback = res[this.recentBooking];
+        }).then((data) => {
+            const filePath = data.files[0];
+            this.filePath = filePath;
         });
     }
 
-    submitFeedback() {
-        this.feedbackModel.date = moment().format("YYYY-M-D");
-        this.dataService.saveFeedback(this.recentBooking, this.feedbackModel).subscribe(res => {
-            alert('Feedback sent successfully!');
-            this.getUserFeedbacks();
+    uploadFileToFirebaseStorage(filePath: string, fileName: string) {
+        this.isUploading = true;
+        firebase.storage.uploadFile({
+            remoteFullPath: `uploads/products-images/${fileName}.png`,
+            localFullPath: filePath,
+            // get notified of file upload progress
+            onProgress: (status) => {
+                this.uploadPercentage = status.percentageCompleted;
+            }
+        }).then((uploadedFile) => {
+                this.isUploading = false;
+                this.getUploadedFileUrl(fileName);
+            },
+            (error) => {
+                this.isUploading = false;
+                alert(error);
+            }
+        );
+    }
+
+    saveProduct() {
+        this.productModel['date'] = moment();
+        this.dataService.saveProductInfo(this.productModel).subscribe(res => {
+            alert('Product uploaded successfully!');
+            this.productModel.title = '';
+            this.productModel.description = '';
+            this.filePath = undefined;
+            this.uploadPercentage = 0;
         }, err => {
             alert(err);
         })
+    }
+
+    getUploadedFileUrl(fileName: string) {
+        firebase.storage.getDownloadUrl({
+            remoteFullPath: `uploads/products-images/${fileName}.png`,
+        }).then(url => {
+            this.productModel['imagePath'] = url;
+                this.saveProduct();
+            }, error => {
+                alert(error);
+            }
+        );
+    }
+
+    onSave() {
+        if (this.productModel.title == '' || this.productModel.description == '') {
+            alert('Title or description cannot be empty!');
+            return;
+        }
+        if (!this.filePath) {
+            alert('Please select a file!');
+            return;
+        }
+        this.uploadFileToFirebaseStorage(this.filePath, this.productModel.title);
     }
 
     onLogout() {

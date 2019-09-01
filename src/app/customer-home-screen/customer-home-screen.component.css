@@ -51,3 +51,14 @@
 .products {
     font-size: 15%;
 }
+.product-box {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-width: 1px;
+    border-bottom-color: #ddd;
+}
+product-img {
+    height: 200;
+    width: 100%;
+}

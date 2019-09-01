@@ -183,4 +183,32 @@ export class DataService {
         )
     }
 
+    saveProductInfo(payload) {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+                currentUser => {
+                    if (!currentUser || !currentUser.isAuth) {
+                        return of(null);
+                    }
+                    payload['addedBy'] = currentUser.id;
+                    return this.http.post(`${DataService.Config.FIREBASE_URL}/products.json?auth=${currentUser.token}`,
+                        payload);
+                })
+        );
+    }
+
+    fetchProducts() {
+        return this.authService.user.pipe(
+            take(1),
+            switchMap(
+                currentUser => {
+                    if (!currentUser || !currentUser.isAuth) {
+                        return of(null);
+                    }
+                    return this.http.get(`${DataService.Config.FIREBASE_URL}/products.json?auth=${currentUser.token}`);
+                })
+        );
+    }
+
 }

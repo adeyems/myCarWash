@@ -17,6 +17,8 @@ export class CustomerHomeScreenComponent implements OnInit {
     public currentUser: string;
     recentBooking: string;
     recentRating;
+    products: any[] = [];
+    isLoading: boolean;
 
     constructor(
         private router: RouterExtensions,
@@ -34,6 +36,7 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getProducts();
         this.getUserRecentBooking();
         this.getUserRatings();
     }
@@ -97,6 +100,19 @@ export class CustomerHomeScreenComponent implements OnInit {
         this.dataService.fetchUserRatings().subscribe(res => {
             this.recentRating = res[this.recentBooking];
         });
+    }
+
+    getProducts() {
+        this.isLoading = false;
+        this.dataService.fetchProducts().subscribe(res => {
+            if (res) {
+                for (let key in res) {
+                    this.products.push(res[key]);
+                }
+            }
+        }, err => {
+
+        })
     }
 
     onLogout() {

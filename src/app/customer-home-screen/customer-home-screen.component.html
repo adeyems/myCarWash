@@ -16,23 +16,25 @@
             <Button class="btn btn-main" col="1" (tap)="goToProvideRating()" text="Provide rating"></Button>
         </GridLayout>
         <StackLayout class="hr-dark"></StackLayout>
-        <StackLayout paddingBottom="30" paddingTop="10">
-            <Label class="browse text-center" text="Browse Products"></Label>
-        </StackLayout>
-        <FlexboxLayout *ngIf="isLoading" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
-            <Label text="loading products..."></Label>
-            <ActivityIndicator busy="true"></ActivityIndicator>
+        <FlexboxLayout paddingBottom="30" paddingTop="10" width="100%" justifyContent="center" alignItems="center">
+            <Button class="btn btn-main" text="Browse Products" (tap)="browseProducts()"></Button>
         </FlexboxLayout>
-        <FlexboxLayout *ngIf="!isLoading && products.length < 1" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
-            <Label text="No products found!"></Label>
-        </FlexboxLayout>
-        <FlexboxLayout *ngIf="!isLoading && products.length > 0" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
-            <FlexboxLayout class="product-box" *ngFor="let product of products">
-                <Label [text]="product.title" textWrap="true" marginBottom="5" class="text-deep-bold" fontSize="17"></Label>
-                <Label [text]="product.description" textWrap="true" marginBottom="5" fontSize="15"></Label>
-                <Image [src]="product.imagePath" stretch="none" decodeWidth="200" decodeHeight="200" class="product-img"></Image>
+        <StackLayout marginBottom="10" *ngIf="loadProducts">
+            <FlexboxLayout *ngIf="isLoading" flexDirection="column" justifyContent="center" alignItems="center">
+                <Label text="loading products..."></Label>
+                <ActivityIndicator busy="true"></ActivityIndicator>
             </FlexboxLayout>
-        </FlexboxLayout>
+            <FlexboxLayout *ngIf="!isLoading && products.length < 1" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
+                <Label text="No products found!"></Label>
+            </FlexboxLayout>
+            <FlexboxLayout *ngIf="!isLoading && products.length > 0" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
+                <FlexboxLayout class="product-box" *ngFor="let product of products">
+                    <Label [text]="product.title" textWrap="true" class="products" marginBottom="5" class="text-deep-bold" fontSize="17"></Label>
+                    <Label [text]="product.description" textWrap="true" class="products" marginBottom="5" fontSize="15"></Label>
+                    <Image [src]="product.imagePath" stretch="none" decodeWidth="300" decodeHeight="300" class="product-img"></Image>
+                </FlexboxLayout>
+            </FlexboxLayout>
+        </StackLayout>
 <!--        <StackLayout paddingBottom="20">-->
 <!--            <Image src="res://coffee" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>-->
 <!--        </StackLayout>-->

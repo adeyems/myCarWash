@@ -19,6 +19,7 @@ export class CustomerHomeScreenComponent implements OnInit {
     recentRating;
     products: any[] = [];
     isLoading: boolean;
+    loadProducts: boolean;
 
     constructor(
         private router: RouterExtensions,
@@ -36,13 +37,18 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getProducts();
+        // this.getProducts();
         this.getUserRecentBooking();
         this.getUserRatings();
     }
 
     goToBrowseRelevantInfo() {
         this.router.navigate(["relevantInfo"]).then();
+    }
+
+    browseProducts() {
+        this.loadProducts = true;
+        this.getProducts() ;
     }
 
     goToMakeBooking() {

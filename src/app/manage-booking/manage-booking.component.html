@@ -8,148 +8,49 @@
 <ScrollView>
     <StackLayout>
         <StackLayout paddingBottom="30" paddingTop="30">
-            <Label class="text-center customer-name" text="Ade Adeoye"></Label>
+            <Label class="text-center customer-name" [text]="customerFullName"></Label>
         </StackLayout>
         <StackLayout>
-            <GridLayout paddingBottom="30" rows="20,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,"
-                        columns="*,5*,5*,5*,5*,5*,*">
-                <Label row="0" col="0" class="table-head" text=""></Label>
-                <Label  row="0" col="1" class="table-head" text="Mon"></Label>
-                <Label row="0" col="2" class="table-head" text="Tue"></Label>
-                <Label  row="0" col="3" class="table-head" text="Wed"></Label>
-                <Label row="0" col="4" class="table-head" text="Thur"></Label>
-                <Label  row="0" col="5" class="table-head" text="Fri"></Label>
-                <Label  row="0" col="6" class="table-head"text=""></Label>
-                <Label row="1" class="odd" col="0" text=""></Label>
-                <Label  row="1" class="odd" col="1"  text="9:00-9:30"></Label>
-                <Label row="1" class="odd" col="2"  text="9:00-9:30"></Label>
-                <Label  row="1" class="odd" col="3" text="9:00-9:30"></Label>
-                <Label row="1" class="odd" col="4"  text="9:00-9:30"></Label>
-                <Label  row="1" class="odd" col="5" text="9:00-9:30"></Label>
-                <Label  row="1" class="odd" col="6" text=""></Label>
-                <Label row="2" class="even" col="0"  text=""></Label>
-                <Label  row="2" class="even" col="1"  text="9:30-10:00"></Label>
-                <Label row="2" class="even" col="2"  text="9:30-10:00"></Label>
-                <Label  row="2" class="even" col="3" text="9:30-10:00"></Label>
-                <Label row="2" class="even" col="4"  text="9:30-10:00"></Label>
-                <Label  row="2" class="even" col="5" text="9:30-10:00"></Label>
-                <Label  row="2" class="even" col="6" text=""></Label>
-                <Label row="3" class="odd" col="0"  text=""></Label>
-                <Label  row="3" class="odd" col="1"  text="10:00-10:30"></Label>
-                <Label row="3" class="odd" col="2"  text="10:00-10:30"></Label>
-                <Label  row="3" class="odd" col="3" text="10:00-10:30"></Label>
-                <Label row="3" class="odd" col="4"  text="10:00-10:30"></Label>
-                <Label  row="3" class="odd" col="5" text="10:00-10:30"></Label>
-                <Label  row="3" class="odd" col="6" text=""></Label>
-                <Label  row="4" class="even" col="0" text=""></Label>
-                <Label  row="4" class="even" col="1"  text="10:00-10:30"></Label>
-                <Label row="4" class="even" col="2"  text="10:00-10:30"></Label>
-                <Label  row="4" class="even" col="3" text="10:00-10:30"></Label>
-                <Label row="4" class="even" col="4"  text="10:00-10:30"></Label>
-                <Label  row="4" class="even" col="5" text="10:00-10:30"></Label>
-                <Label  row="4" class="even" col="6" text=""></Label>
-                <Label  row="5" class="odd" col="0" text=""></Label>
-                <Label  row="5" class="odd" col="1"  text="10:30-11:00"></Label>
-                <Label row="5" class="odd" col="2"  text="10:30-11:00"></Label>
-                <Label  row="5" class="odd" col="3" text="10:30-11:00"></Label>
-                <Label row="5" class="odd" col="4"  text="10:30-11:00"></Label>
-                <Label  row="5" class="odd" col="5" text="10:30-11:00"></Label>
-                <Label  row="5" class="odd" col="6" text=""></Label>
-                <Label  row="6" class="even" col="0" text=""></Label>
-                <Label  row="6" class="even" col="1"  text="11:00-11:30"></Label>
-                <Label row="6" class="even" col="2"  text="11:00-11:30"></Label>
-                <Label  row="6" class="even" col="3" text="11:00-11:30"></Label>
-                <Label row="6" class="even" col="4"  text="11:00-11:30"></Label>
-                <Label  row="6" class="even" col="5" text="11:00-11:30"></Label>
-                <Label  row="6" class="even" col="6" text=""></Label>
-                <Label  row="7" class="odd" col="0" text=""></Label>
-                <Label  row="7" class="odd" col="1"  text="11:30-12:00"></Label>
-                <Label row="7" class="odd" col="2"  text="11:30-12:00"></Label>
-                <Label  row="7" class="odd" col="3" text="11:30-12:00"></Label>
-                <Label row="7" class="odd" col="4"  text="11:30-12:00"></Label>
-                <Label  row="7" class="odd" col="5" text="11:30-12:00"></Label>
-                <Label  row="7" class="odd" col="6" text=""></Label>
-                <Label  row="8" class="even" col="0" text=""></Label>
-                <Label  row="8" class="even" col="1"  text="12:00-12:30"></Label>
-                <Label row="8" class="even" col="2"  text="12:00-12:30"></Label>
-                <Label  row="8" class="even" col="3" text="12:00-12:30"></Label>
-                <Label row="8" class="even" col="4"  text="12:00-12:30"></Label>
-                <Label  row="8" class="even" col="5" text="12:00-12:30"></Label>
-                <Label  row="8" class="even" col="6" text=""></Label>
-                <Label  row="9" class="odd" col="0" text=""></Label>
-                <Label  row="9" class="odd" col="1"  text="12:30-13:00"></Label>
-                <Label row="9" class="odd" col="2"  text="12:30-13:00"></Label>
-                <Label  row="9" class="odd" col="3" text="12:30-13:00"></Label>
-                <Label row="9" class="odd" col="4"  text="12:30-13:00"></Label>
-                <Label  row="9" class="odd" col="5" text="12:30-13:00"></Label>
-                <Label  row="9" class="odd" col="6" text=""></Label>
-                <Label  row="10" class="even" col="0" text=""></Label>
-                <Label  row="10" class="even" col="1"  text="13:00-13:30"></Label>
-                <Label row="10" class="even" col="2"  text="13:00-13:30"></Label>
-                <Label  row="10" class="even" col="3" text="13:00-13:30"></Label>
-                <Label row="10" class="even" col="4"  text="13:00-13:30"></Label>
-                <Label  row="10" class="even" col="5" text="13:00-13:30"></Label>
-                <Label  row="11" class="odd" col="6" text=""></Label>
-                <Label  row="11" class="odd" col="0" text=""></Label>
-                <Label  row="11" class="odd" col="1"  text="13:30-11:30"></Label>
-                <Label row="11" class="odd" col="2"  text="13:30-11:30"></Label>
-                <Label  row="11" class="odd" col="3" text="13:30-11:30"></Label>
-                <Label row="11" class="odd" col="4"  text="13:30-11:30"></Label>
-                <Label  row="11" class="odd" col="5" text="13:30-11:30"></Label>
-                <Label  row="11" class="odd" col="6" text=""></Label>
-                <Label  row="12" class="even" col="0" text=""></Label>
-                <Label  row="12" class="even" col="1"  text="11:00-11:30"></Label>
-                <Label row="12" class="even" col="2"  text="11:00-11:30"></Label>
-                <Label  row="12" class="even" col="3" text="11:00-11:30"></Label>
-                <Label row="12" class="even" col="4"  text="11:00-11:30"></Label>
-                <Label  row="12" class="even" col="5" text="11:00-11:30"></Label>
-                <Label  row="12" class="even" col="6" text=""></Label>
-                <Label  row="13" class="odd" col="0" text=""></Label>
-                <Label  row="13" class="odd" col="1"  text="11:00-11:30"></Label>
-                <Label row="13" class="odd" col="2"  text="11:00-11:30"></Label>
-                <Label  row="13" class="odd" col="3" text="11:00-11:30"></Label>
-                <Label row="13" class="odd" col="4"  text="11:00-11:30"></Label>
-                <Label  row="13" class="odd" col="5" text="11:00-11:30"></Label>
-                <Label  row="13" class="odd" col="6" text=""></Label>
-                <Label  row="14" class="even" col="0" text=""></Label>
-                <Label  row="14" class="even" col="1"  text="11:00-11:30"></Label>
-                <Label row="14" class="even" col="2"  text="11:00-11:30"></Label>
-                <Label  row="14" class="even" col="3" text="11:00-11:30"></Label>
-                <Label row="14" class="even" col="4"  text="11:00-11:30"></Label>
-                <Label  row="14" class="even" col="5" text="11:00-11:30"></Label>
-                <Label  row="14" class="even" col="6" text=""></Label>
-                <Label  row="15" class="odd" col="0" text=""></Label>
-                <Label  row="15" class="odd" col="1"  text="11:00-11:30"></Label>
-                <Label row="15" class="odd" col="2"  text="11:00-11:30"></Label>
-                <Label  row="15" class="odd" col="3" text="11:00-11:30"></Label>
-                <Label row="15" class="odd" col="4"  text="11:00-11:30"></Label>
-                <Label  row="15" class="odd" col="5" text="11:00-11:30"></Label>
-                <Label  row="15" class="odd" col="6" text=""></Label>
-                <Label  row="16" class="even" col="0" text=""></Label>
-                <Label  row="16" class="even" col="1"  text="11:00-11:30"></Label>
-                <Label row="16" class="even" col="2"  text="11:00-11:30"></Label>
-                <Label  row="16" class="even" col="3" text="11:00-11:30"></Label>
-                <Label row="16" class="even" col="4"  text="11:00-11:30"></Label>
-                <Label  row="16" class="even" col="5" text="11:00-11:30"></Label>
-                <Label  row="16" class="even" col="6" text=""></Label>
-                <Label  row="17" class="odd" col="0" text=""></Label>
-                <Label  row="17" class="odd" col="1"  text="11:00-11:30"></Label>
-                <Label row="17" class="odd" col="2"  text="11:00-11:30"></Label>
-                <Label  row="17" class="odd" col="3" text="11:00-11:30"></Label>
-                <Label row="17" class="odd" col="4"  text="11:00-11:30"></Label>
-                <Label  row="17" class="odd" col="5" text="11:00-11:30"></Label>
-                <Label  row="17" class="odd" col="6" text=""></Label>
-                <Label  row="18" class="even" col="0" text=""></Label>
-                <Label  row="18" class="even" col="1"  text="11:30-12:00"></Label>
-                <Label row="18" class="even" col="2"  text="11:30-12:00"></Label>
-                <Label  row="18" class="even" col="3" text="11:30-12:00"></Label>
-                <Label row="18" class="even" col="4"  text="11:30-12:00"></Label>
-                <Label  row="18" class="even" col="5" text="11:30-12:00"></Label>
-                <Label  row="18" class="even" col="6" text=""></Label>
-            </GridLayout>
+            <FlexboxLayout class="table-box">
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Mon" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots; let i = index" [text]="ts.timeSlot" class="th-item"
+                           (tap)="deleteBooking('a', ts.timeSlot, currentBooking.a.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 1) || (currentBooking.a.bookedDate == dateRange[0] && currentBooking.a.timeSlot == ts.timeSlot)"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Tue" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                           (tap)="deleteBooking('b', ts.timeSlot, currentBooking.b.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 2) || (currentBooking.b.bookedDate == dateRange[1] && currentBooking.b.timeSlot == ts.timeSlot)"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Wed" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                           (tap)="deleteBooking('c', ts.timeSlot, currentBooking.c.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 3) || (currentBooking.c.bookedDate == dateRange[2] && currentBooking.c.timeSlot == ts.timeSlot)"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Thur" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                           (tap)="deleteBooking('d', ts.timeSlot, currentBooking.d.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                        [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 4) || (currentBooking.d.bookedDate == dateRange[3] && currentBooking.d.timeSlot == ts.timeSlot)"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="th-box" flexDirection="column">
+                    <Label text="Fri" class="table-head"></Label>
+                    <Label *ngFor="let ts of timeSlots let i = index" [text]="ts.timeSlot" class="th-item"
+                           (tap)="deleteBooking('e', ts.timeSlot, currentBooking.e.bookingId)"
+                           [class.odd]="i%2 != 0" [class.even]="i%2 == 0"
+                           [class.is-selected]="(selectedSlot?.timeSlot == ts.timeSlot && selectedSlot?.bookedDay == 5) || (currentBooking.e.bookedDate == dateRange[4] && currentBooking.e.timeSlot == ts.timeSlot)"></Label>
+                </FlexboxLayout>
+            </FlexboxLayout>
         </StackLayout>
-        <StackLayout>
-            <Button class="btn btn-main" col="1" text="Confirm"></Button>
+        <StackLayout StackLayout *ngIf="currentBooking">
+            <Button class="btn btn-main" col="1" text="Cancel All Booking" (tap)="onCancelSlot()"></Button>
         </StackLayout>
     </StackLayout>
 </ScrollView>

@@ -1,0 +1,71 @@
+<ActionBar class="action-bar">
+  <GridLayout rows="*" columns="2*,5*,*">
+    <Image
+      src="res://icon"
+      class="page-icon"
+      row="0"
+      verticalAlignment="center"
+      col="0"
+      stretch="aspectFit"
+    ></Image>
+    <Image
+      src="res://account"
+      class="account-icon"
+      row="0"
+      verticalAlignment="center"
+      col="2"
+      stretch="aspectFill"
+      (tap)="onLogout()"
+    ></Image>
+    <Label
+      class="text-center action-bar-title"
+      row="0"
+      col="1"
+      verticalAlignment="center"
+      textWrap="true"
+      text="Customer Bookings"
+    ></Label>
+  </GridLayout>
+</ActionBar>
+<ScrollView>
+  <StackLayout marginTop="10">
+    <FlexboxLayout
+      width="100%"
+      height="100%"
+      justifyContent="center"
+      alignItems="center"
+      *ngIf="isLoading"
+    >
+      <ActivityIndicator busy="true"></ActivityIndicator>
+    </FlexboxLayout>
+    <StackLayout *ngIf="!isLoading">
+      <FlexboxLayout width="100%" class="booking-table-row bg-ghost">
+        <Label text="Customer Info." textWrap="true" class="b-t-col text-deep-bold"></Label>
+        <Label text="Booking ID/Booked Date" textWrap="true" class="b-t-col text-deep-bold"></Label>
+        <Label text="Time Slot" textWrap="true" class="b-t-col2 text-deep-bold"></Label>
+      </FlexboxLayout>
+      <FlexboxLayout
+        width="100%"
+        justifyContent="center"
+        class="booking-table-row"
+        *ngIf="bookingsDetails.length < 1"
+      >
+        <Label text="No booking found!" textWrap="true"></Label>
+      </FlexboxLayout>
+      <StackLayout *ngIf="bookingsDetails.length > 0">
+        <FlexboxLayout width="100%" class="booking-table-row" *ngFor="let bkd of bookingsDetails">
+          <StackLayout class="b-t-col">
+            <Label [text]="bkd.customerName+' '+bkd.customerSurname" textWrap="true"></Label>
+            <Label [text]="bkd.customerEmail" textWrap="true"></Label>
+            <Label [text]="bkd.customerPhone" textWrap="true"></Label>
+          </StackLayout>
+          <StackLayout class="b-t-col">
+            <Label [text]="bkd.id" textWrap="true"></Label>
+            <Label [text]="bkd.bookedDate" textWrap="true" class="text-deep-bold"></Label>
+          </StackLayout>
+          <Label [text]="bkd.timeSlot" textWrap="true" class="b-t-col2 text-deep-bold"></Label>
+        </FlexboxLayout>
+      </StackLayout>
+    </StackLayout>
+  </StackLayout>
+</ScrollView>

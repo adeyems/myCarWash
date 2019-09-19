@@ -51,15 +51,39 @@ Label {
 
 .btn-main {
     color: #F5F5F5;
-    background-color: #000000;
+    /*background-color: rgb(185, 26, 47);*/
     width: 500px;
+    background-color: seagreen;
     height: 200px;
     padding: 10px 31px 10px 31px;
     border-width: 3px;
+}
+.btn-success {
+    color: #F5F5F5;
+    background-color: rgb(20, 150, 31);
+    /* width: 500px;
+    height: 200px; */
+    padding: 10px 31px 10px 31px;
+    /* border-width: 3px; */
 }
 
 .title {
     font-size: 25%;
     color: black;
     font-family: "Al Bayan";
+}
+.text-deep-bold {
+    font-weight: bold;
+}
+.feedbacks-box {
+    border-bottom-width: 1;
+    border-bottom-color: #ddd;
+    width: 100%;
+}
+.fbk-user-info {
+    background-color: ghostwhite;
+    padding: 10 5;
+}
+.is-selected {
+    color: #ffa534;
 }

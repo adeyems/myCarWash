@@ -5,14 +5,63 @@
         <Label class="text-center action-bar-title" row="0" col="1" verticalAlignment="center" textWrap="true" text="Customer Home Screen"></Label>
     </GridLayout>
 </ActionBar>
-<StackLayout paddingTop="50">
-    <GridLayout paddingBottom="30" rows="auto" columns="*,*">
-        <Button (tap)="goToMakeBooking()" col="0" class="btn btn-main" text="Make Booking"></Button>
-        <Button class="btn btn-main" col="1" (tap)="goToManageBooking()" text="Manage Booking"></Button>
-    </GridLayout>
-    <GridLayout paddingBottom="30" rows="auto" columns="*,*">
-        <Button (tap)="goToProvideFeedback()" col="0" class="btn btn-main" text="Provide Feedback"></Button>
-        <Button class="btn btn-main" col="1" (tap)="goToProvideRating()" text="Provide rating"></Button>
-    </GridLayout>
-</StackLayout>
+<ScrollView>
+    <StackLayout paddingTop="50">
+        <GridLayout paddingBottom="30" rows="auto" columns="*,*">
+            <Button (tap)="goToMakeBooking()" col="0" class="btn btn-main" text="Make Booking"></Button>
+            <Button class="btn btn-main" col="1" (tap)="goToManageBooking()" text="Manage Booking"></Button>
+        </GridLayout>
+        <GridLayout paddingBottom="30" rows="auto" columns="*,*">
+            <Button (tap)="goToProvideFeedback()" col="0" class="btn btn-main" text="Provide Feedback"></Button>
+            <Button class="btn btn-main" col="1" (tap)="goToProvideRating()" text="Provide rating"></Button>
+        </GridLayout>
+        <StackLayout class="hr-dark"></StackLayout>
+        <FlexboxLayout paddingBottom="30" paddingTop="10" width="100%" justifyContent="center" alignItems="center">
+            <Button class="btn btn-main" text="Browse Products" (tap)="browseProducts()"></Button>
+        </FlexboxLayout>
+        <StackLayout marginBottom="10" *ngIf="loadProducts">
+            <FlexboxLayout *ngIf="isLoading" flexDirection="column" justifyContent="center" alignItems="center">
+                <Label text="loading products..."></Label>
+                <ActivityIndicator busy="true"></ActivityIndicator>
+            </FlexboxLayout>
+            <FlexboxLayout *ngIf="!isLoading && products.length < 1" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
+                <Label text="No products found!"></Label>
+            </FlexboxLayout>
+            <FlexboxLayout *ngIf="!isLoading && products.length > 0" flexDirection="column" justifyContent="center" alignItems="center" marginBottom="10">
+                <FlexboxLayout class="product-box" *ngFor="let product of products">
+                    <Label [text]="product.title" textWrap="true" class="products" marginBottom="5" class="text-deep-bold" fontSize="17"></Label>
+                    <Label [text]="product.description" textWrap="true" class="products" marginBottom="5" fontSize="15"></Label>
+                    <Image [src]="product.imagePath" stretch="none" decodeWidth="300" decodeHeight="300" class="product-img"></Image>
+                </FlexboxLayout>
+            </FlexboxLayout>
+        </StackLayout>
+<!--        <StackLayout paddingBottom="20">-->
+<!--            <Image src="res://coffee" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>-->
+<!--        </StackLayout>-->
+<!--        <StackLayout>-->
+<!--            <Image src="res://soda" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>-->
+<!--        </StackLayout>-->
+<!--        <StackLayout paddingBottom="30">-->
+<!--            <Image src="res://foods" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>-->
+<!--            <Label-->
+<!--                    textAlignment="center"-->
+<!--                    class="products"-->
+<!--                    textWrap="true"-->
+<!--                    text="We're the hot spot for tasty snacks and meals on the move. From hot dogs and hand-held foods, to sandwiches and other healthy options, we've got your hunger covered."-->
+<!--            >-->
+<!--            </Label>-->
+<!--        </StackLayout>-->
+<!--        <StackLayout paddingBottom="20">-->
+<!--            <Image src="res://drinks" class="page-icon" row="0" verticalAlignment="center" col="0" stretch="aspectFit"></Image>-->
+<!--            <Label-->
+<!--                    textAlignment="center"-->
+<!--                    class="products"-->
+<!--                    textWrap="true"-->
+<!--                    text="People of all ages love this slush, and it's always just as refreshing as the first time you tasted it. What's this summer's original flavour? Drop by and see when the weather gets warm."-->
+<!--            >-->
+<!--            </Label>-->
+<!--        </StackLayout>-->
+    </StackLayout>
+</ScrollView>
+
 

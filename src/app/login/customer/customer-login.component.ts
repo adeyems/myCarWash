@@ -71,28 +71,16 @@ export class CustomerLoginComponent implements OnInit {
         this.emailControlIsValid = true;
         this.passwordControlIsValid = true;
         this.isLoading = true;
-        this.authService.checkUserType(email, 'customers')
-            .subscribe(response => {
-                const keys = Object.keys(response);
-                let matchFound: boolean = false;
-                for (let i = 0; i < keys.length; i++) {
-                    let key = keys[i];
-                    // console.log('????????',keys[i]);
-                    if (response[key].email == email) {
-                        matchFound = true;
-                        break;
-                    }
-                }
-                // console.log('@@@@@@@',matchFound);
-                if (!matchFound) {
-                    alert('User not recognized!!!');
-                    return;
-                }
-            this.authService.login(email, password).subscribe(
+        this.authService.checkUserType('customers').subscribe(response => {
+            const keys = Object.keys(response);
+            this.authService.login(email, password, keys).subscribe(
                 resData => {
-                    console.log(resData);
                     this.isLoading = false;
-                    this.router.navigate(['customerHome'], { clearHistory: true }).then();
+                    if (keys.indexOf(resData.localId) > -1) {
+                        this.router.navigate(['customerHome'], { clearHistory: true }).then();
+                    } else {
+                        alert('User not recognized!!!');
+                    }
                 },
                 err => {
                     console.log(err);

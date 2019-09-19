@@ -21,7 +21,7 @@
 }
 
 .input {
-    border-color: #226600;
+    border-color: red;
     width: 90%;
     height: 200px;
     border-radius: 8%;
@@ -38,19 +38,45 @@
     color: red;
 }
 
-.table-head {
-    background-color: ghostwhite;
-    color: #303030;
+.table-box {
+    width: 100%;
+    justify-content: center;
 }
-
-.odd {
+.table-head {
+    background-color: black;
+    color: ghostwhite;
+    padding: 10 0;
+    align-items: center;
+}
+.th-box {
+    width: 20%;
+}
+.th-item {
+    padding: 10 0;
+    align-items: center;
+}
+.th-item.odd.is-selected,
+.th-item.even.is-selected {
+    /*color: white;*/
+    border-color: green;
+    border-width: 1;
+    /*background-color: green;*/
+}
+.th-item.odd.is-booked,
+.th-item.even.is-booked {
+    /*color: white;*/
+    /*background-color: red;*/
+    border-color: red;
+    border-width: 1;
+}
+.th-item.odd {
     background-color: white;
     color: black;
 }
 
-.even {
-    background-color: black;
-    color: white;
+.th-item.even {
+    background-color: ghostwhite;
+    color: black;
 }
 
 .customer-name {

@@ -1,4 +1,7 @@
 export class UserModel {
+    public surname: string;
+    public name: string;
+
     constructor(
         public id: string,
         public email: string,
@@ -22,5 +25,9 @@ export class UserModel {
 
     get timeToExpiry() {
         return this._tokenExpirationDate.getTime() - new Date().getTime();
+    }
+
+    get fullName() {
+        return this.surname + " " + this.name;
     }
 }

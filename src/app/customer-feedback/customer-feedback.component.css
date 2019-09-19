@@ -21,19 +21,8 @@
 }
 
 .input {
-    border-color: #226600;
-    width: 90%;
-    height: 200px;
-    border-radius: 8%;
-    border-width: 5px;
-}
-
-.input.ng-invalid.ng-touched {
-    border-color: red;
-    color: red;
-}
-
-.input-error {
-    width: 90%;
-    color: red;
+    /* height: 45; */
+    border-radius: 3;
+    border-width: 1;
+    border-color: #ddd;
 }

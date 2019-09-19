@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
-import {RouterExtensions} from "nativescript-angular";
-import {of} from "rxjs";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TextField} from "tns-core-modules/ui/text-field";
+import {Component, OnInit, ViewContainerRef} from "@angular/core";
+import {RouterExtensions, ModalDialogOptions, ModalDialogService} from "nativescript-angular";
 import { AuthService } from "~/app/services/auth.service";
 import {ActivatedRoute} from "@angular/router";
+import { DataService } from "../services/data.service";
+import { UserRating } from "../modals/user-rating/user-rating.component";
+import * as moment from 'moment';
 
 @Component({
     selector: "Home",
@@ -13,19 +13,22 @@ import {ActivatedRoute} from "@angular/router";
     styleUrls: ["./customer-home-screen.component.css"]
 })
 export class CustomerHomeScreenComponent implements OnInit {
-    form: FormGroup;
-    emailControlIsValid = true;
-    passwordControlIsValid = true;
-    isLoading = false;
-    @ViewChild("passwordEl", {static: false}) passwordEl: ElementRef<TextField>;
-    @ViewChild("emailEl", {static: false}) emailEl: ElementRef<TextField>;
     pageTitle: string;
     public currentUser: string;
+    recentBooking: string;
+    recentRating;
+    products: any[] = [];
+    isLoading: boolean;
+    loadProducts: boolean;
 
     constructor(
         private router: RouterExtensions,
         private authService: AuthService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private vcRef: ViewContainerRef,
+        protected dataService: DataService,
+        protected modalDialog: ModalDialogService
+
     ) {
         this.activatedRoute.queryParams.subscribe( params => {
             this.currentUser = params["user"];
@@ -34,61 +37,18 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.form = new FormGroup({
-            email: new FormControl(null, {
-                updateOn: 'blur',
-                validators: [Validators.required, Validators.email]
-            }),
-            password: new FormControl(null, {
-                updateOn: 'blur',
-                validators: [Validators.required, Validators.minLength(6)]
-            })
-        });
-
-        this.form.get('email').statusChanges.subscribe(status => {
-            this.emailControlIsValid = status === 'VALID';
-        });
-
-        this.form.get('password').statusChanges.subscribe(status => {
-            this.passwordControlIsValid = status === 'VALID';
-        });
-    }
-
-    onSubmit() {
-        this.emailEl.nativeElement.focus();
-        this.passwordEl.nativeElement.focus();
-        this.passwordEl.nativeElement.dismissSoftInput();
-
-        if (!this.form.valid) {
-            return;
-        }
-
-        const email = this.form.get('email').value;
-        const password = this.form.get('password').value;
-        this.form.reset();
-        this.emailControlIsValid = true;
-        this.passwordControlIsValid = true;
-        this.isLoading = true;
-        this.authService.login(email, password).subscribe(
-            resData => {
-                this.isLoading = false;
-                this.router.navigate(['/challenges'], { clearHistory: true }).then();
-            },
-            err => {
-                console.log(err);
-                this.isLoading = false;
-            }
-        );
-    }
-
-    onDone() {
-        this.emailEl.nativeElement.focus();
-        this.passwordEl.nativeElement.focus();
-        this.passwordEl.nativeElement.dismissSoftInput();
+        // this.getProducts();
+        this.getUserRecentBooking();
+        this.getUserRatings();
     }
 
     goToBrowseRelevantInfo() {
         this.router.navigate(["relevantInfo"]).then();
+    }
+
+    browseProducts() {
+        this.loadProducts = true;
+        this.getProducts() ;
     }
 
     goToMakeBooking() {
@@ -100,11 +60,65 @@ export class CustomerHomeScreenComponent implements OnInit {
     }
 
     goToProvideFeedback() {
-
+        this.router.navigate(["customerFeedback"]);
     }
 
     goToProvideRating() {
+        console.log(this.recentBooking);
+        console.log(this.recentRating);
+        if (!this.recentBooking && !this.recentRating) {
+            alert(`No booking to rate!`);
+            return;
+        }
+        if (this.recentRating) {
+            alert('Your last booking has been rated!');
+            return;
+        }
+        const options: ModalDialogOptions = {
+            fullscreen: true,
+            viewContainerRef: this.vcRef
+        }
+        this.modalDialog.showModal(UserRating, options).then(response => {
+            if (response) {
+                let ratingModel = {
+                    rating: response,
+                    date: moment().format("YYYY-M-D")
+                };
+                this.dataService.saveUserRating(this.recentBooking, ratingModel).subscribe(res => {
+                    alert('Thank you for rating!');
+                    this.getUserRatings();
+                }, err => {
+                    alert(err);
+                });
+            }
+        });
+    }
 
+    getUserRecentBooking() {
+        this.dataService.getBookings(1).subscribe(res => {
+            this.recentBooking = Object.keys(res)[0];
+        }, err => {
+            alert(err);
+        })
+    }
+
+    getUserRatings() {
+        this.dataService.fetchUserRatings().subscribe(res => {
+            this.recentRating = res[this.recentBooking];
+        });
+    }
+
+    getProducts() {
+        this.isLoading = false;
+        this.dataService.fetchProducts().subscribe(res => {
+            if (res) {
+                for (let key in res) {
+                    this.products.push(res[key]);
+                }
+            }
+        }, err => {
+
+        })
     }
 
     onLogout() {

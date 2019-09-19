@@ -2,20 +2,20 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 
 import {ReactiveFormsModule} from "@angular/forms";
-import {RelevantInfoRoutingModule} from "~/app/relevant-info/relevant-info-routing.module";
-import {RelevantInfoComponent} from "~/app/relevant-info/relevant-info.component";
+import {ManagementHomeScreenComponent} from "~/app/management-home-screen/management-home-screen.component";
+import { ManagementHomeScreenRoutingModule} from "~/app/management-home-screen/management-home-screen-routing.module";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         ReactiveFormsModule,
-        RelevantInfoRoutingModule
+        ManagementHomeScreenRoutingModule
     ],
     declarations: [
-        RelevantInfoComponent
+        ManagementHomeScreenComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class RelevantInfoModule { }
+export class ManagementHomeScreenModule { }

@@ -1,0 +1,13 @@
+keytool -genkey -v -keystore my-key.keystore -alias my-android-key -keyalg RSA -keysize 2048 -validity 10000
+
+keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000
+
+ keytool -list -v -keystore my-key.keystore -alias my-android-key -storepass p455w0rd -keypass p455w0rd
+
+ keytool -list -v -keystore debug.keystore -alias androiddebugkey -storepass android -keypass android
+
+
+
+
+
+tns build android --release --key-store-path my-key.keystore --key-store-password p455w0rd --key-store-alias my-android-key --key-store-alias-password p455w0rd

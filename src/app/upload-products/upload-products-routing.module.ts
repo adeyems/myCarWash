@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
-import {RelevantInfoComponent} from "~/app/relevant-info/relevant-info.component";
+import { UploadProductsComponent } from "./upload-products.component";
 
 const routes: Routes = [
     {
         path: '',
-        component: RelevantInfoComponent
+        component: UploadProductsComponent
     },
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
     imports: [NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
-export class RelevantInfoRoutingModule { }
+export class UploadProductsRoutingModule { }

@@ -18,4 +18,4 @@ To build a release apk run `tns build android --release --key-store-path <my-key
 
 #### Thumbs up to [@Afolabidivia](https://github.com/Afolabidivia) for his immense contribution.
 
-[Download on Google Playstore](https://play.google.com/store/apps/details?id=org.nativescript.checkHealth)
+[Download on Google Playstore](https://play.google.com/store/apps/details?id=org.nativescript.myCaWash)

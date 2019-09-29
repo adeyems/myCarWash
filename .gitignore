@@ -31,3 +31,9 @@ typings/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+#App files
+google-services.json
+*.keystore
+*.aab
+notes.txt

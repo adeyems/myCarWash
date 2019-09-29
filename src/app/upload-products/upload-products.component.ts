@@ -20,7 +20,7 @@ export class UploadProductsComponent implements OnInit {
     productModel = {
         title: "",
         description: ""
-    }
+    };
     filePath: string;
     uploadPercentage: number = 0;
     isUploading: boolean = false;

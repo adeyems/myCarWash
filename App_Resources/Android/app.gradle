@@ -14,6 +14,9 @@ android {
     minSdkVersion 19
     multiDexEnabled true
     generatedDensities = []
+    ndk {
+          abiFilters.clear()
+        }
   }
   aaptOptions {
     additionalParameters "--no-version-vectors"
@@ -22,4 +25,3 @@ android {
     javaMaxHeapSize "4g"
   }
 }
-

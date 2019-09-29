@@ -18,6 +18,7 @@ import {VerticalAlignment} from "tns-core-modules/ui/enums";
 import stretch = VerticalAlignment.stretch;
 import {error} from "tns-core-modules/trace";
 import {CustomerModel} from "~/app/models/customer.model";
+import {keys} from "~/app/helpers/keys";
 
 interface AuthResponseData {
     kind: string;
@@ -41,10 +42,10 @@ export class AuthService {
     ) {}
 
     static Config = {
-        SIGNUP_URL: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCJPkyI8QTDGOCgkYdaKC4OBg5HaCSlbzI",
-        SIGNIN_URL: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCJPkyI8QTDGOCgkYdaKC4OBg5HaCSlbzI",
-        FIREBASE_API_KEY: "AIzaSyCJPkyI8QTDGOCgkYdaKC4OBg5HaCSlbzI",
-        FIREBASE_URL:"https://mycarwash-4cf24.firebaseio.com"
+        SIGNUP_URL: keys.SIGNUP_URL,
+        SIGNIN_URL: keys.SIGNIN_URL,
+        FIREBASE_API_KEY: keys.FIREBASE_API_KEY,
+        FIREBASE_URL: keys.FIREBASE_APP_URL
     };
     get user() {
         return this._user.asObservable();

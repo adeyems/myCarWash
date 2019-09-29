@@ -75,7 +75,7 @@ export class ManageBookingComponent implements OnInit {
                 for (let key in response) {
                     let bkdate = moment(response[key].bookedDate, ["YYYY-M-D"]);
                     let tdate = moment();
-                    if (this.dateRange.indexOf(response[key].bookedDate) > -1 && tdate.utc().valueOf() < bkdate.utc().valueOf()) {
+                    if (this.dateRange.indexOf(response[key].bookedDate) > -1) {
                         let tempBooking = response[key];
                         tempBooking['bookingId'] = key;
                         switch(response[key].bookedDay) {
